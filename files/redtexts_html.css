@@ -1,5 +1,3 @@
-/* 0 margin prevents gaps from appearing around content */
-
 body {
 		background: #FFF;
 		color: #000;
@@ -11,17 +9,13 @@ body {
 nav {
 		font-size: 0.75em;
 		width: calc(100%-8px);
-		border-top: 1px dotted black;
+		border-top: 1px dotted #FD3D3D;
 		text-align: right;
 		padding: 4px;
 		margin-top: 1em;
 }
 
 nav a { color: inherit; text-decoration: none; }
-
-/* Style red and black header at top of each page */
-/* margin: auto prevents white space above header */
-/* Padding controls size of red box */
 
 header.topbanner {
 		background: #FD3D3D;
@@ -31,11 +25,7 @@ header.topbanner {
 		font-size: 1.25em;
 }
 
-/* Prevent the topbanner from being huge */
-
-header.topbanner h1,h2 {
-		margin: 0em;
-}
+header.topbanner h1,h2 { margin: 0em; }
 
 header.topbanner ul {
 		margin: 0em;
@@ -43,27 +33,15 @@ header.topbanner ul {
 		font-size: 1.25em;
 }
 
-/* Make it so that "texts", "about," and "links" links in the */
-/* topbanner appear in a single line */
-
 header.topbanner li {
 		display: inline;
 		padding: 0em;
 }
 
-/* Don't especially style the links in the header */
-
 header a {
 		color: #000;
 		text-decoration: none;
 }
-
-/* Style the header at the top of each article. */
-/************************************************/
-
-/* The padding gives the text inside the grey box some breathing */
-/* space, while the bottom margin means the grey box doesn't run up */
-/* against the start of the article */
 
 header.metadata {
 		background: whitesmoke;
@@ -72,32 +50,20 @@ header.metadata {
 		padding: 1em;
 }
 
-/* Override the margin that would normally push h1 article title down */
-/* from top of grey box, and the h2 byline down from the h1 title */
-
-header.metadata p {
-		margin: 0;
-}
+header.metadata p { margin: 0; }
 
 header.metadata h1 {
 		font-size: 1.7em;
 		margin: 0;
 }
 
-/* Make the h2 byline the size of normal text, albeit still bold */
-
-header.metadata h2 {
-		font-size: 1.0em;
-}
+header.metadata h2 { font-size: 1.0em; }
 
 header.metadata h3 {
 		font-size: 1.0em;
 		font-weight: normal;
 		margin-bottom: 0;
 }
-
-/* Set a maximum size for content; wraps when reached. Padding prevents
-text from hitting edge of page when window small*/
 
 main {
 		line-height: 1.4;
@@ -106,47 +72,30 @@ main {
 		padding: 1em 1em 0 1em;
 }
 
-/* Set heading colors to red and make h3 the size of regular text */
-
 h1, h2, h3 {
 		color: #FD3D3D;
 }
 
-h3 {
-		font-size: 1em;
+h3 { font-size: 1em; }
+
+li { padding: .4em 0; }
+
+li, p { text-align: justify; }
+
+table { border-collapse: collapse; }
+table thead th {
+	background: gainsboro;
+}
+table th, table td {
+	border: 1px gray solid;
+	padding: 4px;
+}
+table th {
+	text-align: left; 
+	background: whitesmoke;	
+}
+table td a {
+	text-decoration: none;
 }
 
-/* Some space to the top and to the bottom of list items */
-
-li {
-		padding: .4em 0;
-
-}
-
-li, p {
-		text-align: justify;
-}
-
-/* Make the footer text small and center aligned. */
-
-@media print {
-		header.topbanner, footer {
-				display: none;
-		}
-
-		header.metadata {
-				padding-bottom: 0;
-		}
-
-		header.metadata h1 {
-				font-size: 1.25em;
-		}
-
-		header.metadata h2, h3 {
-				font-size: .9em;
-		}
-
-		h2 {
-				font-size: 1.25em;
-		}
-}
+code {  font-family: 'Noto Mono', 'Open Mono', "Lucida Console", Monaco, monospace, monospace; }

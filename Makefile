@@ -9,9 +9,9 @@ HTML=$(TEXTS:texts/%.txt=html/%.html)
 PDF=$(TEXTS:texts/%.txt=pdf/%.pdf)
 
 .PHONY: all clean setup epub clean-epub mobi clean-mobi html clean-html pdf clean-pdf index 
-.DEFAULT: index
+.DEFAULT: index.html
 
-all: index
+all: index.html
 
 setup:
 	mkdir -p epub mobi html pdf 
@@ -25,7 +25,7 @@ epub/%.epub: texts/%.txt
 			pandoc $(PANDOC_EPUB_OPT) -o $@
 
 mobi/%.mobi: epub/%.epub
-	ebook-convert $< $@ --pretty-print 
+	ebook-convert $< $@ --pretty-print --enable-heuristics
 
 html/%.html: texts/%.txt 
 	awk -f $(AWK_SCRIPT) $< |\
@@ -34,14 +34,18 @@ html/%.html: texts/%.txt
 pdf/%.pdf: epub/%.epub
 	ebook-convert $< $@ --pretty-print --enable-heuristics --smarten-punctuation --paper-size=a4  --margin-bottom 62 --margin-left 68 --margin-right 68  --margin-top 62 --pdf-page-numbers
 	mutool clean -gg -s -l $@
+	mv out.pdf $@
 
 epub: setup $(EPUB)
 mobi: setup epub $(MOBI)
 html: setup $(HTML)
 pdf: setup epub $(PDF)
 
-index: texts epub mobi html pdf
-	echo index
+index.html: texts epub mobi html pdf
+	find texts/ -type f -print0 |\
+			xargs -L 1 -0 awk -f files/printmd.awk |\
+			sort |\
+			awk -f files/index.awk > index.html
 
 clean: clean-epub clean-mobi clean-html clean-pdf clean-texts
 clean-epub:
