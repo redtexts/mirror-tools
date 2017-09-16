@@ -41,20 +41,21 @@ $for(include-before)$
 $include-before$
 $endfor$
 $if(title)$
-<header class="metadata">
-<h1 class="title">$title$</h1>
-$if(subtitle)$
-<h1 class="subtitle">$subtitle$</h1>
-$endif$
+<header class="md">
+<h1>$title$</h1>
 $for(author)$
-<h2 class="author">
-		By $author$ $if(date)$(<time class="date">$date$</time>)$endif$
-</h2>
+<h2>By <em>$author$</em> $if(date)$(<time>$date$</time>)$endif$</h2>
 $endfor$
 $if(description)$
 <blockquote id="desc">
 		$description$
 </blockquote>
+$endif$
+$if(fname)$
+<p id="dl">Download:
+<a href="../epub/$fname$.epub">Epub</a> |
+<a href="../mobi/$fname$.mobi">Mobi (Kindle)</a> |
+<a href="../pdf/$fname$.pdf">PDF</a></p>
 $endif$
 </header>
 $endif$
@@ -64,8 +65,8 @@ $toc$
 </nav>
 $endif$
 $body$
-<nav>
-		<a href=".."><small>redtexts.org mirror</small></a>
-</nav>
+<footer>
+		redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a>
+</footer>
 </body>
 </html>

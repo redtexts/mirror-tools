@@ -1,101 +1,43 @@
 body {
-		background: #FFF;
-		color: #000;
 		font-family: 'Noto Sans', 'Open Sans', Helvetica, Arial, sans-serif;
-		margin: 1em auto 0 auto;
+		margin: 0 auto;
+		padding: 1em 1em 0.5em 1em;
 		max-width: 50em;
+		text-align: justify;
 }
 
-nav {
-		font-size: 0.75em;
-		width: calc(100%-8px);
-		border-top: 1px dotted #FD3D3D;
-		text-align: right;
-		padding: 4px;
-		margin-top: 1em;
-}
-
-nav a { color: inherit; text-decoration: none; }
-
-header.topbanner {
-		background: #FD3D3D;
-		margin: auto;
-		padding: .5em;
-		text-align: center;
-		font-size: 1.25em;
-}
-
-header.topbanner h1,h2 { margin: 0em; }
-
-header.topbanner ul {
-		margin: 0em;
-		padding: 0em;
-		font-size: 1.25em;
-}
-
-header.topbanner li {
-		display: inline;
-		padding: 0em;
-}
-
-header a {
-		color: #000;
-		text-decoration: none;
-}
-
-header.metadata {
+.md {
 		background: whitesmoke;
 		border: 1px silver solid;
-		margin-bottom: 1em;
 		padding: 1em;
 }
-
-header.metadata p { margin: 0; }
-
-header.metadata h1 {
+.md blockquote { margin: 0 5%; }
+.md h1 {
 		font-size: 1.7em;
 		margin: 0;
 }
-
-header.metadata h2 { font-size: 1.0em; }
-
-header.metadata h3 {
-		font-size: 1.0em;
-		font-weight: normal;
-		margin-bottom: 0;
+.md h2 { margin-top: 0; font-size: 1.0em; }
+.md p { margin: 0; overflow-wrap: break-word; hyphens: auto; }
+p#dl {
+		text-align: right;
+		font-size: smaller;
 }
+p#dl a { color: #FD3D3D; }
 
-main {
-		line-height: 1.4;
-		margin: 0 auto;
-		max-width: 50em;
-		padding: 1em 1em 0 1em;
+footer a, h1, h2, h3 { color: #FD3D3D; text-align: left; }
+a { text-decoration: none; }
+li, p { text-align: inherit; }
+
+table { font-size: 90%; margin: 1em 0; text-align: left; border-collapse: collapse; }
+th, td { padding: 4px; border: 1px gray solid; }
+thead th { background: gainsboro; }
+th { background: whitesmoke; }
+td a { padding: 4px; }
+
+footer {
+	border-top: 1px solid #FD3D3D;
+	margin-top: 0.5em;
+	padding-top: 0.5em;
+	text-align: right;
+	font-size: small;
 }
-
-h1, h2, h3 {
-		color: #FD3D3D;
-}
-
-h3 { font-size: 1em; }
-
-li { padding: .4em 0; }
-
-li, p { text-align: justify; }
-
-table { border-collapse: collapse; }
-table thead th {
-	background: gainsboro;
-}
-table th, table td {
-	border: 1px gray solid;
-	padding: 4px;
-}
-table th {
-	text-align: left; 
-	background: whitesmoke;	
-}
-table td a {
-	text-decoration: none;
-}
-
-code {  font-family: 'Noto Mono', 'Open Mono', "Lucida Console", Monaco, monospace, monospace; }

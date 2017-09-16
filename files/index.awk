@@ -1,10 +1,10 @@
 BEGIN {
 		print "<!DOCTYPE html>"
 		print "<title>redtexts.org mirror</title>"
-		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"
+		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=0.9\" />"
 		print "<meta charset=\"utf-8\" />"
-		print "<link rel=\"stylesheet\" href=\"./files/redtexts_html.css\">"
-		print "<h1><code>www.redtexts.org</code> mirror</h1>"
+		print "<link rel=\"stylesheet\" href=\"./style.css\">"
+		print "<h1>red texts mirror</h1>"
 		print "<p>This site mirrors the fantastic <a href=\"https://www.redtexts.org/\"><em>red texts</em> archive</a>,"
 		print "and additionally hosts converted versions of the texts in the <code>.epub</code>, <code>.mobi</code> (Kindle) and <code>.pdf</code> formats."
 		print "All praise for collecting and formatting these texts goes to the admin of <em>red texts</em>. Check of his site for more information.</p>"
@@ -12,7 +12,6 @@ BEGIN {
 		la = ""	# last author
 		FS = "\t"
 }
-
 
 # $1 Author
 # $2 Title
@@ -34,5 +33,5 @@ BEGIN {
 
 END { 
 		print "</tbody></table>"
-		print "<nav><a href=\"https://github.com/xatasan/Redtexts\">Mirror code source</a></nav>"
+		print "<footer><a href=\"https://github.com/xatasan/Redtexts\">mirror tools</a> | <a href=\"..\">web master</a></footer>"
 } 
