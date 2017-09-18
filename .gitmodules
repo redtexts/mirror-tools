@@ -1,0 +1,3 @@
+[submodule "txt"]
+	path = txt
+	url = https://github.com/xatasan/rt-texts

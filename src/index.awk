@@ -1,3 +1,5 @@
+#!/usr/bin/awk -f 
+
 BEGIN {
 		print "<!DOCTYPE html>"
 		print "<title>redtexts.org mirror</title>"
@@ -12,11 +14,6 @@ BEGIN {
 		la = ""	# last author
 		FS = "\t"
 }
-
-# $1 Author
-# $2 Title
-# $3 Date
-# $4 Filename
 
 {
 		if ($1 != la) 
