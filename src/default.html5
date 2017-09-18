@@ -65,8 +65,6 @@ $toc$
 </nav>
 $endif$
 $body$
-<footer>
-		redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a>
-</footer>
+<footer>redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a></footer>
 </body>
 </html>

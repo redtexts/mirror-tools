@@ -1,28 +1,42 @@
-/* This defines styles and classes used in the book */
-/* end reset */
 body {
-    font-family: 'Noto Sans', 'Open Sans', Helvetica, Arial, sans-serif;
-    margin: 1.61803em;
-    text-align: justify;
-    font-size: medium;
-    font-kerning: normal;
-    font-variant: common-ligatures oldstyle-nums proportional-nums;
-    font-feature-settings: "kern", "liga", "clig", "onum", "pnum";
-    line-height: 1.5;
+		font-family: 'Noto Sans', 'Open Sans', Helvetica, Arial, sans-serif;
+		margin: 1.61803em;
+		text-align: justify;
+		font-size: medium;
+		font-kerning: normal;
+		font-variant: common-ligatures oldstyle-nums proportional-nums;
+		font-feature-settings: "kern", "liga", "clig", "onum", "pnum";
+		line-height: 1.5;
 }
 body * { line-height: inherit; }
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Noto Serif', 'Open Serif', Times, serif serif;
-    text-align: left;
-    color: #FD3D3D;
-    font-variant: common-ligatures lining-nums proportional-nums;
-    font-feature-settings: "kern", "liga", "clig", "lnum", "pnum";
-	font-weight: bolder;
+#front {
+		max-height: 100vh;
+		margin: 50vh 0 0 0;
+		-webkit-transform: translateY(-50%);
+		transform: translateY(-50%);
 }
-h1.title { padding-top: 20%; font-variant: small-caps; }
-h1.title, h2.author, h3.date { text-align: center; border-width: 0; color: inherit; }
-ol.toc { padding: 0; margin-left: 1em; }
-ol.toc li { list-style-type: none; margin: 0; padding: 0; }
+h1, h2, h3, h4, h5, h6 {
+		font-family: 'Noto Serif', 'Open Serif', Times, serif;
+		text-align: left;
+		color: #FD3D3D;
+		font-variant: common-ligatures lining-nums proportional-nums;
+		font-feature-settings: "kern", "liga", "clig", "lnum", "pnum";
+		font-weight: bolder;
+}
+h1.title { font-variant: small-caps; }
+h1.title, h2.author, h3.date { text-align: center; border-width: 0; }
+#front blockquote { text-align: left; }
 a.footnoteRef { vertical-align: super; }
-p#source { padding-top: 15%; text-align: center; font-size: smaller; }
-p#source a  { color: #FD3D3D; }
+p#source { text-align: center; font-size: smaller; }
+p#source a { color: #FD3D3D; }
+q { quotes: "“" "”" "‘" "’"; }
+blockquote, p {
+		-epub-hyphens: auto;
+		-webkit-hyphens: auto;
+		-moz-hyphens: auto;
+		hyphens: auto;
+		orphans: 2;
+		widows: 2;
+		overflow-wrap: break-word;
+}
+hr { border-width: 0px; border-top: 1px solid #FD3D3D; }
