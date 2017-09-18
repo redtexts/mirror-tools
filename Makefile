@@ -1,8 +1,9 @@
-PANDOC_OPT=-S -s --data-dir=./src/ --template=src/default
+PANDOC_OPT=-S --data-dir=./src/ --template=src/default
 PANDOC_EPUB_OPT=$(PANDOC_OPT) --epub-chapter-level=2 -t epub3
 PANDOC_HTML_OPT=$(PANDOC_OPT) --css=../style.css -t html5
 CALIBRE_MOBI_OPT=--pretty-print --enable-heuristics
 CALIBRE_PDF_OPT=$(CALIBRE_MOBI_OPT) --smarten-punctuation --paper-size=a4 --margin-bottom 62 --margin-left 68 --margin-right 68 --margin-top 62
+PANDOC_PDF_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontsize=12pt -V geometry="margin=1.2in" -V documentclass=article -V mainfont="Utopia" --latex-engine=xelatex -t latex 
 
 DIRS=epub mobi html pdf
 TEXTS:=$(wildcard txt/*.md)
@@ -29,8 +30,9 @@ mobi/%.mobi: epub/%.epub
 html/%.html: txt/%.md style.css 
 	pandoc $< $(PANDOC_HTML_OPT) -V fname=$(patsubst html/%.html,%,$@) -o $@ 
 
-pdf/%.pdf: epub/%.epub 
-	ebook-convert $< $@ $(CALIBRE_PDF_OPT)
+pdf/%.pdf: txt/%.md
+	pandoc $< $(PANDOC_PDF_OPT) -o $@
+
 
 style.css:
 	cp ./src/style.css .
