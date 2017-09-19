@@ -1,4 +1,4 @@
-PANDOC_OPT=-S --data-dir=./src/ --template=src/default
+PANDOC_OPT=-S --data-dir=./res/ --template=./res/default
 PANDOC_EPUB_OPT=$(PANDOC_OPT) --epub-chapter-level=2 -t epub3
 PANDOC_HTML_OPT=$(PANDOC_OPT) --css=../style.css -t html5
 CALIBRE_MOBI_OPT=--pretty-print --enable-heuristics
@@ -14,9 +14,9 @@ PDF=$(TEXTS:txt/%.md=pdf/%.pdf)
 
 index.html: $(DIRS) $(EPUB) $(MOBI) $(HTML) $(PDF)
 	find txt/ -name "*.md" -print0 |\
-			xargs -L 1 -0 awk -f ./src/md.awk |\
+			xargs -L 1 -0 awk -f ./res/md.awk |\
 			sort -t'	' -k1,1 -k3,3n -k2,2 |\
-			awk -f ./src/index.awk > index.html
+			awk -f ./res/index.awk > index.html
 
 $(DIRS):
 	mkdir -p $@
@@ -35,7 +35,7 @@ pdf/%.pdf: txt/%.md
 
 
 style.css:
-	cp ./src/style.css .
+	cp ./res/style.css .
 
 clean:
 	rm -rf $(DIRS) index.html style.css
