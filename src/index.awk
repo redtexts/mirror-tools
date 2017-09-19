@@ -26,5 +26,5 @@ BEGIN {
 
 END { 
 		print "</tbody></table>"
-		print "<footer><a href=\"https://github.com/xatasan/Redtexts\">mirror tools</a> | <a href=\"..\">web master</a></footer>"
+		print "<footer><a href=\"https://github.com/xatasan/rt-mirror\">mirror tools</a> | <a href=\"..\">web master</a></footer>"
 } 
