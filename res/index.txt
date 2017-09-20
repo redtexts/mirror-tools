@@ -1,4 +1,3 @@
 <h1>red texts mirror</h1>
-<p>This site mirrors the fantastic <a href="https://www.redtexts.org/"><em>red texts: communist text files</em> archive</a>,
-and additionally hosts converted versions of the texts in the <code>.epub</code>, <code>.mobi</code> (Kindle) and <code>.pdf</code> formats.
-All praise for collecting and formatting these texts goes to the admin of <em>red texts</em>. Check of his site for more information.</p>
+<p>This site serves as a mirror to the <a href="https://www.redtexts.org/"><em>red texts: communist text files</em> archive</a>. For more informations on the accutal project, visit their site.</p>
+<p>Besides just re-hosting the texts from <em>red texts</em> this mirror also has converted each of these into different formats, listed in the table below.</p>

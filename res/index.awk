@@ -4,7 +4,7 @@ BEGIN {
 		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=0.9\" />"
 		print "<meta charset=\"utf-8\" />"
 		print "<link rel=\"stylesheet\" href=\"./style.css\">"
-		while ((getline < "./src/index.txt") > 0)
+		while ((getline < "./res/index.txt") > 0)
 				print;
 		print "<table><thead><tr><th>Title</th><th>Date</th><th>Epub</th><th>Kindle</th><th>PDF</th></tr></thead><tbody>"
 		la = ""	# last author
