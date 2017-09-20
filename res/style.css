@@ -12,18 +12,19 @@ header h1 { font-size: 1.7em; margin: 0; }
 header h2 { margin-top: 0; font-size: 1.0em; }
 header p { margin: 0; overflow-wrap: break-word; hyphens: auto; }
 header p#dl { text-align: right; font-size: smaller; padding-top: 0.5em; }
-header p#dl a { padding-top: 0.5em; color: #FD3D3D; }
+header p#dl a { padding-top: 0.5em; }
 
-footer a, h1, h2, h3 { color: #FD3D3D; text-align: left; }
-a { text-decoration: none; }
+h1, h2, h3 { color: #FD3D3D; text-align: left; }
 li, p { text-align: inherit; }
+a { color: #FD3D3D; text-decoration: none; }
 hr { border-width: 0px; border-top: 1px solid #FD3D3D; }
 
 table { font-size: 90%; margin: 1em 0; text-align: left; border-collapse: collapse; }
 th, td { padding: 4px; border: 1px gray solid; }
 thead th { background: gainsboro; }
 th { background: whitesmoke; }
-td a { padding: 4px; }
+table a { color: blue; }
+table a:visited { color: purple; }
 
 footer {
 	border-top: 1px solid #FD3D3D;
