@@ -19,6 +19,16 @@ li, p { text-align: inherit; }
 a { color: #FD3D3D; text-decoration: none; }
 hr { border-width: 0px; border-top: 1px solid #FD3D3D; }
 
+a.an { 
+		display: none; 
+		min-width: .75em; 
+		margin-left: -.75em; 
+		color: silver;  
+		font-family: 'Noto Serif', 'Open Serif', times, serif;
+}
+a.an:hover { color: gray; } 
+h1:hover a.an, h2:hover a.an, h3:hover a.an { display: inline-block; }
+
 table { font-size: 90%; margin: 1em 0; text-align: left; border-collapse: collapse; }
 th, td { padding: 4px; border: 1px gray solid; }
 thead th { background: gainsboro; }
@@ -32,4 +42,13 @@ footer {
 	padding-top: 0.5em;
 	text-align: right;
 	font-size: small;
+}
+
+/* mobile */
+@media (max-width: 54em) {
+		a.an {
+				min-width: unset;
+				float: right;
+				display: inline-block;
+		}
 }
