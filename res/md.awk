@@ -9,6 +9,9 @@ BEGIN { OFS="\t"; }
 
 # output medatada: author, title, date and filename w/o extention
 END {
+		sub(/^"/, "", md["title"]) # remove preceding quotation marks
+		sub(/"$/, "", md["title"]) # remove trailing quotation marks
+		gsub(/\\"/, "\"", md["title"]) # unescape quotation marks
 		sub(/^.*\//, "", FILENAME) # remove file path
 		sub(/\..*$/, "", FILENAME) # remove file extention
 		print md["author"], md["title"], md["date"], FILENAME
