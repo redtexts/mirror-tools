@@ -2,6 +2,7 @@ epub/
 pdf/
 mobi/
 html/
-texts/
 index.html
 style.css
+res/header.txt
+res/footer.txt
