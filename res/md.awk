@@ -1,3 +1,5 @@
+#!/usr/bin/awk -f
+
 BEGIN { OFS="\t"; }
 
 # read in all multimarkup metadata

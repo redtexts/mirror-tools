@@ -1,3 +1,5 @@
+#!/usr/bin/awk -f
+
 BEGIN {
 		print "<!DOCTYPE html>"
 		print "<title>redtexts.org mirror</title>"

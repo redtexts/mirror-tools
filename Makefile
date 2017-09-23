@@ -13,9 +13,9 @@ PDF=$(TEXTS:txt/%.md=pdf/%.pdf)
 
 index.html: $(DIRS) $(EPUB) $(MOBI) $(HTML) $(PDF)
 	find txt/ -name "*.md" -print0 |\
-			xargs -L 1 -0 awk -f ./res/md.awk |\
+			xargs -L 1 -0 ./res/md.awk |\
 			sort -t'	' -k1,1 -k3,3n -k2,2 |\
-			awk -f ./res/index.awk > index.html
+			./res/index.awk > index.html
 
 $(DIRS):
 	mkdir -p $@
@@ -27,7 +27,7 @@ mobi/%.mobi: epub/%.epub
 	ebook-convert $< $@ $(CALIBRE_MOBI_OPT)
 
 html/%.html: txt/%.md style.css 
-	pandoc $< $(PANDOC_HTML_OPT) -V fname=$(patsubst html/%.html,%,$@) -V aname=$(shell awk -f ./res/md.awk $< | awk -f ./res/aname.awk) | awk -f ./res/anchor.awk > $@ 
+	pandoc $< $(PANDOC_HTML_OPT) -V fname=$(patsubst html/%.html,%,$@) -V aname=$(shell ./res/md.awk $< | ./res/aname.awk) | ./res/anchor.awk > $@ 
 
 pdf/%.pdf: txt/%.md
 	pandoc $< $(PANDOC_PDF_OPT) -o $@
