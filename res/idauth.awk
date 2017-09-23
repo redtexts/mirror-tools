@@ -1,5 +1,5 @@
 function idauth(author) {
-		gsub(/\s+/, "-", author);
-		gsub(/[^A-Za-z0-9-]/, "", author);
+		gsub(/\s+/, "_", author);
+		gsub(/\W/, "", author);
 		return tolower(author);
 }
