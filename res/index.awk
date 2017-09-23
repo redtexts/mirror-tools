@@ -7,13 +7,14 @@ BEGIN {
 		while ((getline < "./res/index.txt") > 0)
 				print;
 		print "<table><thead><tr><th>Title</th><th>Date</th><th>Epub</th><th>Kindle</th><th>PDF</th></tr></thead><tbody>"
-		la = ""	# last author
 		FS = "\t"
 }
 
+@include "./res/idauth.awk"
+
 {
 		if ($1 != la) 
-				print "<tr><th colspan=5>" $1 "</th></tr>"
+				print "<tr><th colspan=5 id=\"" idauth($1) "\"><a href=\"#" idauth($1) "\">" $1 "</a></th></tr>"
 		la = $1;
 		print "<tr>"
 		print "<td><a href=\"./html/" $4 ".html\"><em>" $2 "</em></a></td>"
