@@ -4,7 +4,7 @@ BEGIN {
 		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=0.9\" />"
 		print "<meta charset=\"utf-8\" />"
 		print "<link rel=\"stylesheet\" href=\"./style.css\">"
-		while ((getline < "./res/index.txt") > 0)
+		while ((getline < "./res/header.txt") > 0)
 				print;
 		print "<table><thead><tr><th>Title</th><th>Date</th><th>Epub</th><th>Kindle</th><th>PDF</th></tr></thead><tbody>"
 		FS = "\t"
@@ -27,5 +27,7 @@ BEGIN {
 
 END { 
 		print "</tbody></table>"
+		while ((getline < "./res/footer.txt") > 0)
+				print;
 		print "<footer><a href=\"https://github.com/xatasan/rt-mirror\">mirror tools</a> | <a href=\"..\">web master</a></footer>"
 } 

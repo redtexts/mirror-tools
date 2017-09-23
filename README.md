@@ -17,6 +17,9 @@ To properly build everything, the following tools will have to be installed, bes
 - [XeTeX](http://xetex.sourceforge.net/)/XeLaTeX: for proper, quality pdf generation
 - [AWK](https://en.wikipedia.org/wiki/AWK): to generate the `index.html` and extract metadata from .md files
 
+To customize your specific mirror, edit the `res/header.txt` and `res/footer.txt` files to respectivly add HTML markup above and below the generated text table.
+It these are not found, no text is inserted and no error is reported.
+
 ---
 
 All code is [in the public domain](./LICENSE). Originally written by [Xatasan](https://sub.god.jp/~xat/), 2017.
