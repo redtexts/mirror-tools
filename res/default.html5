@@ -65,6 +65,9 @@ $toc$
 </nav>
 $endif$
 $body$
-<footer>redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a></footer>
+<footer>
+		<span style="float: left; cursor: pointer;" onclick="document.body.classList.toggle('dark');">L/D</span>
+	redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a>
+</footer>
 </body>
 </html>
