@@ -49,6 +49,22 @@ footer {
 		text-align: right;
 		font-size: small;
 }
+footer #nd {
+		float: left;
+		cursor: pointer;
+		display: inline-block;
+		height: 100%;
+		width: 1.25em;
+		background: #111;
+		color: white;
+		margin-top: -0.5em;
+		margin-bottom: -0.5em;
+		padding: 0.55em;
+		text-align: center;
+		font-weight: bold;
+		transition: 0.5s background, 0.5s color;
+}
+footer #nd::before { content: 'N'; }
 
 /* mobile */
 @media (max-width: 54em) {
@@ -89,9 +105,17 @@ footer {
 				font-size: smaller;
 		}
 		footer a { color: white; font-weight: bold; }
+
+		footer #nd {
+			margin-left: -0.5em;
+			margin-top: -0.85em;
+			padding-top: 0.85em;
+			width: 2em;
+		}
 }
 
 /* dark theme */
-.dark { background: #111; color: #eee; }
-
-.dark header { background: #222; border-color: #333; }
+body.dark { background: #111; color: #eee; }
+body.dark header { background: #222; border-color: #333; }
+body.dark footer #nd { background: #fff; color: #222; }
+body.dark footer #nd::before { content: 'D'; }

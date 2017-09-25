@@ -66,8 +66,8 @@ $toc$
 $endif$
 $body$
 <footer>
-		<span style="float: left; cursor: pointer;" onclick="document.body.classList.toggle('dark');">L/D</span>
-	redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a>
+		<span id="nd" title="Toggle night/day mode" onclick="document.body.classList.toggle('dark')"></span>
+		redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a>
 </footer>
 </body>
 </html>
