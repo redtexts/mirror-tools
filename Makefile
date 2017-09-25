@@ -11,11 +11,17 @@ MOBI=$(TEXTS:txt/%.md=mobi/%.mobi)
 HTML=$(TEXTS:txt/%.md=html/%.html)
 PDF=$(TEXTS:txt/%.md=pdf/%.pdf)
 
-index.html: $(DIRS) $(EPUB) $(MOBI) $(HTML) $(PDF)
+index.html: $(DIRS) $(EPUB) $(MOBI) $(HTML) $(PDF) keywords.html
 	find txt/ -name "*.md" -print0 |\
 			xargs -L 1 -0 ./res/md.awk |\
 			sort -t'	' -k1,1 -k3,3n -k2,2 |\
 			./res/index.awk > index.html
+
+keywords.html:
+	find txt/ -name "*.md" -print0 |\
+			xargs -L 1 -0 ./res/md.awk -v keywords=1 |\
+			sort -t'	' -k5,5 -k1,1 -k3,3n -k2,2 |\
+			./res/keywords.awk > keywords.html
 
 $(DIRS):
 	mkdir -p $@
@@ -31,7 +37,6 @@ html/%.html: txt/%.md style.css
 
 pdf/%.pdf: txt/%.md
 	pandoc $< $(PANDOC_PDF_OPT) -o $@
-
 
 style.css:
 	cp ./res/style.css .

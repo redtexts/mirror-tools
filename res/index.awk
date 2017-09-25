@@ -31,5 +31,9 @@ END {
 		print "</tbody></table>"
 		while ((getline < "./res/footer.txt") > 0)
 				print;
-		print "<footer><a href=\"https://github.com/xatasan/rt-mirror\">mirror tools</a> | <a href=\"..\">web master</a></footer>"
+		print "<footer>"
+		print "<a href=\"https://github.com/xatasan/rt-mirror\">mirror tools</a> |"
+		print "<a href=\"keywords.html\">keywords</a> |"
+		print "<a href=\"..\">web master</a>"
+		print "</footer>"
 } 

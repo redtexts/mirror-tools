@@ -41,7 +41,11 @@ END {
 		sub(/^.*\//, "", FILENAME) # remove file path
 		sub(/\..*$/, "", FILENAME) # remove file extention
 
-		# output once for every author
-		for (i in md["author"])
-				print md["author"][i], md["title"][0], md["date"][0], FILENAME
+		if (keywords == 1 && "keywords" in md) {
+				for (i in md["keywords"]) # for each keyword...
+				for (j in md["author"]) # ...and each author print a row
+				print md["author"][j], md["title"][0], md["date"][0], FILENAME, md["keywords"][i];
+		} else # if no keywords...
+			for (i in md["author"]) # ...print a row for each author
+			print md["author"][i], md["title"][0], md["date"][0], FILENAME;
 }

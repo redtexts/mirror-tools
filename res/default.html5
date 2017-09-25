@@ -11,7 +11,7 @@ $if(date-meta)$
   <meta name="dcterms.date" content="$date-meta$">
 $endif$
 $if(keywords)$
-  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$">
+  <meta name="keywords" content="$for(keywords)$$keywords.name$$sep$, $endfor$">
 $endif$
   <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
   <style type="text/css">code{white-space: pre;}</style>
@@ -56,6 +56,14 @@ $if(fname)$
 <a href="../epub/$fname$.epub">Epub</a> |
 <a href="../mobi/$fname$.mobi">Mobi (Kindle)</a> |
 <a href="../pdf/$fname$.pdf">PDF</a></p>
+$endif$
+$if(keywords)$
+<p id="kw">
+Keywords:
+$for(keywords)$
+<a href="../keywords.html#$keywords.link$">$keywords.word$</a>$sep$,
+$endfor$
+</p>
 $endif$
 </header>
 $endif$
