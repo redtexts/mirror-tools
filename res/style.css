@@ -6,7 +6,6 @@ body {
 		background: #fff;
 		color: #222;
 		line-height: 1.5;
-		transition: 0.5s background, 0.5s color;
 }
 
 header { 
@@ -14,11 +13,11 @@ header {
 		border: 1px silver solid; 
 		padding: 1em; 
 		border-radius: 5px;
-		transition: 0.5s background, 0.5s border;
 }
 header blockquote { margin: 0 5%; }
 header h1 { font-size: 1.7em; margin: 0; }
 header h2 { margin-top: 0; font-size: 1.0em; }
+header h2 a { font-style: italic; }
 header p { margin: 0; overflow-wrap: break-word; hyphens: auto; }
 header p#dl { text-align: right; font-size: smaller; padding-top: 0.5em; }
 header p#dl a { padding-top: 0.5em; }
@@ -41,6 +40,7 @@ table { font-size: 85%; margin: 1em 0; border-collapse: collapse; }
 th, td { text-align: left; padding: 4px; border: 1px gray solid; }
 thead th { background: gainsboro; }
 th { background: whitesmoke; }
+th a { color: black; }
 
 footer {
 		border-top: 1px solid #FD3D3D;
@@ -49,22 +49,14 @@ footer {
 		text-align: right;
 		font-size: small;
 }
-footer #nd {
+footer span#nd {
 		float: left;
 		cursor: pointer;
-		display: inline-block;
+		width: 1.5em;
 		height: 100%;
-		width: 1.25em;
-		background: #111;
-		color: white;
-		margin-top: -0.5em;
-		margin-bottom: -0.5em;
-		padding: 0.55em;
-		text-align: center;
 		font-weight: bold;
-		transition: 0.5s background, 0.5s color;
 }
-footer #nd::before { content: 'N'; }
+footer span#nd::before { content: 'N'; }
 
 /* mobile */
 @media (max-width: 54em) {
@@ -84,14 +76,9 @@ footer #nd::before { content: 'N'; }
 		}
 		p, h1, h2, h3, h4 { margin: 16px; }
 		li { margin-right: 16px; }
-		th, td {
-				border-width: 0;
-				padding: 8px;
-		}
+		th, td { border-width: 0; padding: 8px; }
 		table { margin-bottom: 0; overflow-x: auto; display: block; }
-		tr td:not(:first-of-type) { 
-				border-left: 1px solid whitesmoke; 
-		}
+		tr td:not(:first-of-type) { border-left: 1px solid whitesmoke; }
 		tr td:nth-of-type(3), tr td:nth-of-type(4), tr td:nth-of-type(5) { text-align: center;  }
 		tr td:not(:first-of-type) a { width: 100%; font-size: 125%; }
 		tr td:first-of-type, thead th:first-of-type, tbody th { padding-left: 16px; }
@@ -105,17 +92,10 @@ footer #nd::before { content: 'N'; }
 				font-size: smaller;
 		}
 		footer a { color: white; font-weight: bold; }
-
-		footer #nd {
-			margin-left: -0.5em;
-			margin-top: -0.85em;
-			padding-top: 0.85em;
-			width: 2em;
-		}
+		footer span#nd { width: 2em; }
 }
 
 /* dark theme */
 body.dark { background: #111; color: #eee; }
 body.dark header { background: #222; border-color: #333; }
-body.dark footer #nd { background: #fff; color: #222; }
-body.dark footer #nd::before { content: 'D'; }
+body.dark footer span#nd::before { content: 'D'; }
