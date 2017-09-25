@@ -43,9 +43,9 @@ $endfor$
 $if(title)$
 <header class="md">
 <h1>$title$</h1>
-$for(author)$
-<h2>By <a href="../#$aname$">$author$</a> $if(date)$(<time>$date$</time>)$endif$</h2>
-$endfor$
+<h2>By 
+$for(author)$<a href="../#$author.link$">$author.name$</a>$sep$; $endfor$
+$if(date)$(<time>$date$</time>)$endif$</h2>
 $if(description)$
 <blockquote id="desc">
 		$description$

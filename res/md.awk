@@ -10,7 +10,7 @@ BEGIN {
 
 # add field to current multi-value field
 !nr && /^\s*-\s+.*/ {
-		md[cr][ri++] = gensub(/^\s+*-\s+/, "", "g")
+		md[cr][ri++] = gensub(/^\s+*-\s+|\s*$/, "", "g")
 }
 
 # finish parsing multi-value field
@@ -20,13 +20,13 @@ BEGIN {
 
 # add single-value field to metadata
 nr && /^\w+:\s+.*$/ { 
-		md[gensub(/:$/,"","g",$1)][0] = gensub(/^\w+:\s+/, "", ""); 
+		md[gensub(/:$/, "", "g", $1)][0] = gensub(/^\w+:\s+/, "", "g"); 
 }
 
 # start parsing multi-value field
 nr && /^\w+:\s*$/ {
 		nr = 0;
-		cr = gensub(/:$/,"","g",$1);
+		cr = gensub(/:$/, "", "g", $1);
 		ri = 0;
 }
 

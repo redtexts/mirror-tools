@@ -27,7 +27,7 @@ mobi/%.mobi: epub/%.epub
 	ebook-convert $< $@ $(CALIBRE_MOBI_OPT)
 
 html/%.html: txt/%.md style.css 
-	pandoc $< $(PANDOC_HTML_OPT) -V fname=$(patsubst html/%.html,%,$@) -V aname=$(shell ./res/md.awk $< | ./res/aname.awk) | ./res/anchor.awk > $@ 
+	./res/prehtml.awk $< | pandoc $(PANDOC_HTML_OPT) | ./res/posthtml.awk > $@ 
 
 pdf/%.pdf: txt/%.md
 	pandoc $< $(PANDOC_PDF_OPT) -o $@
