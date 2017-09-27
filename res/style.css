@@ -19,10 +19,11 @@ header h1 { font-size: 1.7em; margin: 0; }
 header h2 { margin-top: 0; font-size: 1.0em; }
 header h2 a { font-style: italic; }
 header p { margin: 0; overflow-wrap: break-word; hyphens: auto; }
-header p#dl { text-align: right; font-size: smaller; padding-top: 0.5em; }
-header p#dl a { padding-top: 0.5em; }
+header p#dl { float: right; font-size: smaller; padding-top: 0.5em; }
+header p#dl a header p#kw a { padding-top: 0.5em; }
+header p#kw { font-size: smaller; padding-top: 0.5em; }
 
-h1, h2, h3, header a, p a, li a, footer a { color: #FD3D3D; }
+h1, h2, h2 a, h3, header a, p a, li a, footer a { color: #FD3D3D; }
 blockquote, li, p { text-align: justify; }
 a { text-decoration: none; word-wrap: break-word; }
 hr { border-width: 0px; border-top: 1px solid #FD3D3D; }
@@ -36,11 +37,13 @@ a.an {
 a.an:hover { color: gray; }
 h1:hover a.an, h2:hover a.an, h3:hover a.an { display: inline-block; }
 
-table { font-size: 85%; margin: 1em 0; border-collapse: collapse; }
+table { width: 100%; margin: 1em 0; border-collapse: collapse; }
 th, td { text-align: left; padding: 4px; border: 1px gray solid; }
-thead th { background: gainsboro; }
+thead th { background: silver; }
 th { background: whitesmoke; }
 th a { color: black; }
+th.t { text-align: right; background: gainsboro }
+th.t a { font-style: italic }
 
 footer {
 		border-top: 1px solid #FD3D3D;
@@ -67,6 +70,8 @@ footer span#nd::before { content: 'N'; }
 		} 	
 		header { border-radius: 0; border-width:0; }
 		header h1, header h2 { margin-left: 0; }
+		header p#dl { float: none; }
+		header p#dl, header #kw { text-align: right; }
 		a.an {
 				min-width: unset;
 				float: right;
@@ -77,7 +82,7 @@ footer span#nd::before { content: 'N'; }
 		p, h1, h2, h3, h4 { margin: 16px; }
 		li { margin-right: 16px; }
 		th, td { border-width: 0; padding: 8px; }
-		table { margin-bottom: 0; overflow-x: auto; display: block; }
+		table { font-size: 80%; margin-bottom: 0; overflow-x: auto; display: table; }
 		tr td:not(:first-of-type) { border-left: 1px solid whitesmoke; }
 		tr td:nth-of-type(3), tr td:nth-of-type(4), tr td:nth-of-type(5) { text-align: center;  }
 		tr td:not(:first-of-type) a { width: 100%; font-size: 125%; }

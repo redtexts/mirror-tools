@@ -6,21 +6,19 @@ BEGIN {
 		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"
 		print "<meta charset=\"utf-8\" />"
 		print "<link rel=\"stylesheet\" href=\"./style.css\">"
-		print "<body id=\"keywords\">"
 		while ((getline < "./res/header_kw.txt") > 0)
 				print;
 		FS = "\t"
-		print "<table><thead>"
+		print "<table>"
+		print "<thead><tr><th>Title</th><th>Date</th><th>Epub</th><th>Kindle</th><th>PDF</th></tr></thead><tbody>"
 }
 
 @include "./res/idauth.awk"
 
 {
 		if (!$5) next; 
-		if ($5 != last_keyword) {
-				print "<tr><th class=t colspan=5><h2 id=\"" idauth($5) "\"><a href=\"#" idauth($5) "\">" $5 "</a></h2></th></tr>"
-				print "<tr><th>Title</th><th>Date</th><th>Epub</th><th>Kindle</th><th>PDF</th></tr></thead><tbody>"
-		}
+		if ($5 != last_keyword)
+				print "<tr><th class=t colspan=5 id=\"" idauth($5) "\">Texts on <a href=\"#" idauth($5) "\">" $5 "</a></th></tr>"
 		if ($1 != last_author) 
 				print "<tr><th colspan=5><a href=\"./#" idauth($1) "\">" $1 "</a></th></tr>"
 		print "<tr>"
