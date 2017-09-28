@@ -11,7 +11,7 @@ MOBI=$(TEXTS:txt/%.md=mobi/%.mobi)
 HTML=$(TEXTS:txt/%.md=html/%.html)
 PDF=$(TEXTS:txt/%.md=pdf/%.pdf)
 
-index.html: $(DIRS) $(EPUB) $(MOBI) $(HTML) $(PDF) keywords.html
+index.html: html keywords.html style.css
 	find txt/ -name "*.md" -print0 |\
 			xargs -L 1 -0 ./res/md.awk |\
 			sort -t'	' -k1,1 -k3,3n -k2,2 |\
@@ -23,18 +23,28 @@ keywords.html:
 			sort -t'	' -k5,5 -k1,1 -k3,3n -k2,2 |\
 			./res/keywords.awk > keywords.html
 
-$(DIRS):
-	mkdir -p $@
+$(DIRS:%=mkdir-%):
+	mkdir -p $(patsubst mkdir-%,%,$@)
 
+epub: mkdir-epub $(EPUB) 
+	rm -f index.htmk keywords.html
+	$(MAKE) index.html
 epub/%.epub: txt/%.md 
 	pandoc $< $(PANDOC_EPUB_OPT) -o $@
 
+mobi: mkdir-mobi $(MOBI) 
+	rm -f index.htmk keywords.html
+	$(MAKE) index.html
 mobi/%.mobi: epub/%.epub 
 	ebook-convert $< $@ $(CALIBRE_MOBI_OPT)
 
-html/%.html: txt/%.md style.css 
+html: mkdir-html $(HTML)
+html/%.html: txt/%.md
 	./res/prehtml.awk $< | pandoc $(PANDOC_HTML_OPT) | ./res/posthtml.awk > $@ 
 
+pdf: mkdir-pdf $(PDF) 
+	rm -f index.htmk keywords.html
+	$(MAKE) index.html
 pdf/%.pdf: txt/%.md
 	pandoc $< $(PANDOC_PDF_OPT) -o $@
 
@@ -42,6 +52,6 @@ style.css:
 	cp ./res/style.css .
 
 clean:
-	rm -rf $(DIRS) index.html style.css
+	rm -rf $(DIRS) index.html keywords.html style.css
 
-.PHONY: all clean
+.PHONY: all clean mkdir-epub mkdir-mobi mkdir-html mkdir-pdf 

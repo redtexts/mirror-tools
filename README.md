@@ -6,6 +6,8 @@ git clone https://github.com/xatasan/rt-mirror --recursive
 make 
 ```
 
+This will only build the `.html` files. To also build `.epub`, `.mobi` and `.pdf` files, run `make epub`, `make mobi` and `make pdf` respectivly. 
+
 It is possible and recommended to use more than one job (eg. `make -j 4`) when running `make`, to speed the process up.
 `--recursive` is required to clone the [text repo](https://github.com/xatasan/rt-texts) as a submodule. Updating the submodule can be done by `git submodule update --remove --merge` in the root directory of this repository. Running `make` again, will only update the changed files.
 The resulting files should totally take up ~30MiB (status: 20/9/17).

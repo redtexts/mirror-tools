@@ -1,7 +1,12 @@
 #!/usr/bin/awk -f
 
 @include "./res/idauth.awk"
-BEGIN { FS="\t" }
+BEGIN { 
+		epub = system("test -d ./epub") == 0
+		mobi = system("test -d ./mobi") == 0
+		pdf  = system("test -d ./pdf")  == 0
+		FS="\t"
+}
 
 ### AUTHOR ###
 
@@ -54,7 +59,14 @@ ik && $0 ~ /^\s*-\s+/ {
 ik && $0 !~ /^\s*-\s+/ { ik = 0; }
 
 # add fname tag before metadata ends
-$0 == "..." { print "fname: " gensub(/^.*\/|\..*$/, "", "g", FILENAME) }
+$0 == "..." { 
+		if (epub || mobi || pdf) {
+				print "fname: " gensub(/^.*\/|\..*$/, "", "g", FILENAME)
+				if (epub) print "fname-epub: 1"
+				if (mobi) print "fname-mobi: 1"
+				if (pdf) print "fname-pdf: 1"
+		}
+}
 
 # print all other lines regularly
 //

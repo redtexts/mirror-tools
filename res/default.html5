@@ -53,9 +53,9 @@ $if(description)$
 $endif$
 $if(fname)$
 <p id="dl">Download:
-<a href="../epub/$fname$.epub">Epub</a> |
-<a href="../mobi/$fname$.mobi">Mobi (Kindle)</a> |
-<a href="../pdf/$fname$.pdf">PDF</a></p>
+$if(fname-epub)$ <a href="../epub/$fname$.epub">Epub</a> $endif$
+$if(fname-mobi)$ <a href="../mobi/$fname$.mobi">Mobi (Kindle)</a> $endif$
+$if(fname-pdf)$  <a href="../pdf/$fname$.pdf">PDF</a></p> $endif$
 $endif$
 $if(keywords)$
 <p id="kw">
@@ -65,6 +65,7 @@ $for(keywords)$
 $endfor$
 </p>
 $endif$
+<p style="clear: right;"></p>
 </header>
 $endif$
 $if(toc)$

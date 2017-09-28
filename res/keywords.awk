@@ -1,6 +1,10 @@
 #!/usr/bin/awk -f
 
 BEGIN {
+		has_epub = system("test -d ./epub") == 0
+		has_mobi = system("test -d ./mobi") == 0
+		has_pdf  = system("test -d ./pdf")  == 0
+
 		print "<!DOCTYPE html>"
 		print "<title>keywords - redtexts.org mirror</title>"
 		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"
@@ -8,9 +12,12 @@ BEGIN {
 		print "<link rel=\"stylesheet\" href=\"./style.css\">"
 		while ((getline < "./res/header_kw.txt") > 0)
 				print;
+		print "<table><thead><tr><th>Title</th><th>Date</th>"
+		if (has_epub)	print "<th>Epub</th>"
+		if (has_mobi)	print "<th>Kindle</th>"
+		if (has_pdf)	print "<th>PDF</th>"
+		print "</tr></thead><tbody>"
 		FS = "\t"
-		print "<table>"
-		print "<thead><tr><th>Title</th><th>Date</th><th>Epub</th><th>Kindle</th><th>PDF</th></tr></thead><tbody>"
 }
 
 @include "./res/idauth.awk"
@@ -24,9 +31,9 @@ BEGIN {
 		print "<tr>"
 		print "<td><a href=\"./html/" $4 ".html\"><em>" $2 "</em></a></td>"
 		print "<td><time>" $3 "</time></td>"
-		print "<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>"
-		print "<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>"
-		print "<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>"
+		if (has_epub)	print "<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>"
+		if (has_mobi)	print "<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>"
+		if (has_pdf)	print "<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>"
 		print "</tr>"
 
 		last_keyword = $5
