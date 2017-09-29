@@ -20,7 +20,7 @@ header h2 { margin-top: 0; font-size: 1.0em; }
 header h2 a { font-style: italic; }
 header p { margin: 0; overflow-wrap: break-word; hyphens: auto; }
 header p#dl { float: right; font-size: smaller; padding-top: 0.5em; }
-header p#dl a header p#kw a { padding-top: 0.5em; }
+header p#dl a:not(:first-of-type)::before { content: "| "; color: #222; }
 header p#kw { font-size: smaller; padding-top: 0.5em; }
 
 h1, h2, h2 a, h3, header a, p a, li a, footer a { color: #FD3D3D; }
@@ -103,4 +103,5 @@ footer span#nd::before { content: 'N'; }
 /* dark theme */
 body.dark { background: #111; color: #eee; }
 body.dark header { background: #222; border-color: #333; }
+body.dark header p#dl a:not(:first-of-type)::before { color: #eee; }
 body.dark footer span#nd::before { content: 'D'; }
