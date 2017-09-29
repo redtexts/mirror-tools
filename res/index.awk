@@ -5,8 +5,6 @@ BEGIN {
 		has_mobi = system("test -d ./mobi") == 0
 		has_pdf  = system("test -d ./pdf")  == 0
 
-		print has_epub " " has_mobi " " has_pdf
-
 		print "<!DOCTYPE html>"
 		print "<title>redtexts.org mirror</title>"
 		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=0.9\" />"
