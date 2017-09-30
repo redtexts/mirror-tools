@@ -6,7 +6,7 @@ git clone https://github.com/redtexts/mirror-tools --recursive
 make 
 ```
 
-This will only build the `.html` files. To also build `.epub`, `.mobi` and `.pdf` files, run `make epub`, `make mobi` and `make pdf` respectivly. 
+This will only build the `.html` files. To also build `.epub`, `.mobi` and `.pdf` files, run `make epub`, `make mobi` and `make pdf` respectivly. To intentionally (re-)build everything, run `make all`.
 
 It is possible and recommended to use more than one job (eg. `make -j 4`) when running `make`, to speed the process up.
 `--recursive` is required to clone the [text repo](https://github.com/redtexts/texts) as a submodule. Updating the submodule can be done by `git submodule update --remove --merge` in the root directory of this repository. Running `make` again, will only update the changed files.

@@ -48,6 +48,8 @@ pdf: mkdir-pdf $(PDF)
 pdf/%.pdf: txt/%.md
 	pandoc $< $(PANDOC_PDF_OPT) -o $@
 
+all: epub mobi pdf html index.html
+
 style.css:
 	cp ./res/style.css .
 
