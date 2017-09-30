@@ -40,5 +40,8 @@ END {
 		print "</tbody></table>"
 		while ((getline < "./res/footer_kw.txt") > 0)
 				print;
-		print "<footer><a href=\".\">home</a> | <a href=\"..\">web master</a></footer>"
+		print "<footer>"
+		print "<a href=\".\">home</a> |"
+		print "<a href=\"..\">web master</a></footer>"
+		print "</footer>"
 } 
