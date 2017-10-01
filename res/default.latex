@@ -106,6 +106,7 @@ $endif$
 
 \usepackage{sectsty}
 \usepackage{xcolor}
+\usepackage{longtable,booktabs}
 \definecolor{rot}{HTML}{FD3D3D}
 \allsectionsfont{\color{rot}}
 
