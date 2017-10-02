@@ -20,7 +20,7 @@ To properly build everything, the following tools will have to be installed, bes
 - [AWK](https://en.wikipedia.org/wiki/AWK): to generate the `index.html` and extract metadata from .md files
 
 To customize your specific mirror, edit the `res/header.txt` and `res/footer.txt` files to respectivly add HTML markup above and below the generated text table.
-It these are not found, no text is inserted and no error is reported.
+If these are not found, no text is inserted and no error is reported.
 
 ---
 
