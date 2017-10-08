@@ -99,9 +99,35 @@ footer span#nd::before { content: 'N'; }
 		footer a { color: white; font-weight: bold; }
 		footer span#nd { width: 2em; }
 }
-
 /* dark theme */
 body.dark { background: #111; color: #eee; }
 body.dark header { background: #222; border-color: #333; }
 body.dark header p#dl a:not(:first-of-type)::before { color: #eee; }
 body.dark footer span#nd::before { content: 'D'; }
+
+/* print */
+@media print {
+	html, body {
+		padding: 0;
+		margin: 1em;
+		width: 100vw;
+		height: 100vh;
+		max-width: unset;
+		color: black;
+		background: white;
+		font-family: unset;
+	}
+	header {
+		background: inherit;
+		color: inherit;
+		border: none;
+		border-bottom: 1px solid black;
+	}
+	h1, h2, h2 a, h3, header a, p a, li a, footer a { color: inherit; }
+	table { width: unset; margin: 1em; border-collapse: unset; }
+	th, td { border: unset; }
+	thead th, th, th.t { background: unset }
+	a.an, footer { display: none; }
+	hr { border-color: black; }
+}
+
