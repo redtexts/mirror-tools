@@ -51,7 +51,7 @@ END {
 	    for (j in au) # ... and each author print a row
 		print au[j], md["title"], md["date"], FILENAME, kw[i];
     } else { # if no keywords...
-	print split(md["author"], au, D) 
+	split(md["author"], au, D)
 	for (i in au) # ... print a row for each author
 	    print au[i], md["title"], md["date"], FILENAME;
     }
