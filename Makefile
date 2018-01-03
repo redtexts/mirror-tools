@@ -1,6 +1,6 @@
 PANDOC_OPT=-s -f markdown-raw_html --data-dir=./res/ --template=./res/default
 PANDOC_EPUB_OPT=$(PANDOC_OPT) -m --epub-chapter-level=2 -t epub3
-PANDOC_HTML_OPT=$(PANDOC_OPT) --katex --css=../style.css -t html5
+PANDOC_HTML_OPT=$(PANDOC_OPT) --katex --html-q-tags --section-divs --css=../style.css -t html5
 CALIBRE_MOBI_OPT=--pretty-print --enable-heuristics
 PANDOC_XETEX_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontsize=12pt -V geometry="margin=1.2in" -V documentclass=article -V mainfont="Utopia" --latex-engine=xelatex -t latex
 PANDOC_MS_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontfamily=N -V hyphenate=1 -t ms
