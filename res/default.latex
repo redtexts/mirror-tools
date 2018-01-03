@@ -127,6 +127,9 @@ $if(description)$
 $description$
 \end{abstract}
 $endif$
+$if(brand)$
+\href{https://redtexts.org}{\emph{red texts: communist text files}}
+$endif$
 
 $body$
 

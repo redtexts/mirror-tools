@@ -20,6 +20,11 @@
 						$if(description)$
 						<blockquote>$description$</blockquote>
 						$endif$
+						$if(brand)$
+						<small><a href="https://redtexts.org">
+						<em>red texts: communist text files</em>
+						</a></small>
+						$endif$
 				</div>
 				$else$
 				$body$

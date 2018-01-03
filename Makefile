@@ -1,4 +1,7 @@
 PANDOC_OPT=-s -f markdown-raw_html --data-dir=./res/ --template=./res/default
+ifdef BRAND
+PANDOC_OPT+=-V brand
+endif
 PANDOC_EPUB_OPT=$(PANDOC_OPT) -m --epub-chapter-level=2 -t epub3
 PANDOC_HTML_OPT=$(PANDOC_OPT) --katex --html-q-tags --section-divs --css=../style.css -t html5
 CALIBRE_MOBI_OPT=--pretty-print --enable-heuristics

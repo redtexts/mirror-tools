@@ -63,6 +63,11 @@ $if(description)$
 $description$
 .AE
 $endif$
+$if(brand)$
+.CD
+.pdfhref W -D "https://redtexts.org" -A "\c"
+ -- "\fIred texts: communist text files\fP"
+$endif$
 .1C
 $body$
 $if(toc)$
