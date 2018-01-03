@@ -1,6 +1,3 @@
-#!/usr/bin/awk -f
-
-@include "./res/idauth.awk"
 BEGIN { 
 		epub = system("test -d ./epub") == 0
 		mobi = system("test -d ./mobi") == 0
@@ -11,7 +8,7 @@ BEGIN {
 ### AUTHOR ###
 
 # single record field
-/^author:\s+\w+/ {
+/^author:[[:space:]]+/ {
 		gsub(/^author: /, "")
 		print "author:"
 		print "- name: " $0
@@ -20,23 +17,23 @@ BEGIN {
 }
 
 # multi record field
-/^author:\s*$/ {
+/^author:[[:space:]]*$/ {
 		print "author:"
 		ir = 1
 		next
 }
-ir && $0 ~ /^\s*-\s+/ {
-		gsub(/^\s*-\s+/, "")
+ir && /^[[:space:]]*-[[:space:]]+/ {
+		gsub(/^[[:space:]]*-[[:space:]]+/, "")
 		print "- name: " $0
 		print "  link: " idauth($1)
 		next
 }
-ir && $0 !~ /^\s*-\s+/ { ir = 0 }
+ir && $0 !~ /^[[:space:]]*-[[:space:]]+/ { ir = 0 }
 
 ### KEYWORDS ###
 
 # single record field
-/^keywords:\s+[\w\s]*\w[\w\s]*/ {
+/^keywords:[[:space:]]+([[:alpha:]]|[[:space:]])*[[:alpha:]]([[:alpha:]]|[[:space:]])*/ {
 		gsub(/^keywords: /, "")
 		print "keywords:"
 		print "- word: " $0
@@ -45,28 +42,28 @@ ir && $0 !~ /^\s*-\s+/ { ir = 0 }
 }
 
 # multi record field
-/^keywords:\s*$/ {
+/^keywords:[[:space:]]*$/ {
 		print "keywords:"
 		ik = 1
 		next
 }
-ik && $0 ~ /^\s*-\s+/ {
-		gsub(/^\s*-\s+/, "")
+ik && $0 ~ /^[[:space:]]*-[[:space:]]+/ {
+		gsub(/^[[:space:]]*-[[:space:]]+/, "")
 		print "- word: " $0
 		print "  link: " idauth($1)
 		next
 }
-ik && $0 !~ /^\s*-\s+/ { ik = 0; }
+ik && $0 !~ /^[[:space:]]*-[[:space:]]+/ { ik = 0 }
 
 # add fname tag before metadata ends
 $0 == "..." { 
 		if (epub || mobi || pdf) {
-				print "fname: " gensub(/^.*\/|\..*$/, "", "g", FILENAME)
+		                gsub(/^.*\/|\..*$/, "", FILENAME)
+				print "fname: " FILENAME
 				if (epub) print "fname-epub: 1"
 				if (mobi) print "fname-mobi: 1"
 				if (pdf) print "fname-pdf: 1"
 		}
 }
 
-# print all other lines regularly
-//
+1 # print all other lines regularly

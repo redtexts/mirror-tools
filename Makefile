@@ -14,15 +14,15 @@ PDF=$(TEXTS:txt/%.md=pdf/%.pdf)
 
 index.html: html keywords.html style.css
 	find txt/ -name "*.md" -print0 |\
-			xargs -L 1 -0 ./res/md.awk |\
+			xargs -L 1 -P 4 -0 awk -f res/md.awk |\
 			sort -t'	' -k1,1 -k3,3n -k2,2 |\
-			./res/index.awk > index.html
+			awk -f res/idauth.awk -f res/index.awk > index.html
 
 keywords.html:
 	find txt/ -name "*.md" -print0 |\
-			xargs -L 1 -0 ./res/md.awk -v keywords=1 |\
+			xargs -L 1 -P 4 -0 awk -f res/md.awk -v keywords=1 |\
 			sort -t'	' -k5,5 -k1,1 -k3,3n -k2,2 |\
-			./res/keywords.awk > keywords.html
+			awk -f res/idauth.awk -f res/keywords.awk > keywords.html
 
 $(DIRS:%=mkdir-%):
 	mkdir -p $(patsubst mkdir-%,%,$@)
@@ -41,7 +41,9 @@ mobi/%.mobi: epub/%.epub
 
 html: mkdir-html $(HTML)
 html/%.html: txt/%.md
-	./res/prehtml.awk $< | pandoc $(PANDOC_HTML_OPT) | ./res/posthtml.awk > $@ 
+	awk -f res/idauth.awk -f res/prehtml.awk $< |\
+		pandoc $(PANDOC_HTML_OPT) |\
+		awk -f res/idauth.awk -f res/posthtml.awk > $@
 
 pdf: mkdir-pdf $(PDF) 
 	rm -f index.htmk keywords.html

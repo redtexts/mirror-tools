@@ -1,5 +1,13 @@
-#!/usr/bin/gawk -f
+/^<h[1-3] id=\"[a-z0-9-]+\">.+$/ {
+    header=$0
+    sub(">.*$", "", header)
+    id=$0
+    sub("^.*id=\"", "", id)
+    sub("\">.*$", "", id)
+    rest=$0
+    sub("<h.*>", "", rest)
+    print header "<a class=\"an\" href=\"#" id "\">&sect;</a>" rest;
+    next
+}
 
-BEGIN { hre = "^(<h[1-3] id=\"([a-z0-9-]+)\">)(.+)$" } # header RE
-match($0, hre, d) { print d[1] "<a class=\"an\" href=\"#" d[2] "\">&sect;</a>" d[3]; }
-$0 !~ hre { print }
+1 # if it doesn't match, just print it

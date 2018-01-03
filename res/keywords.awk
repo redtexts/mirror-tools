@@ -1,5 +1,3 @@
-#!/usr/bin/awk -f
-
 BEGIN {
 		has_epub = system("test -d ./epub") == 0
 		has_mobi = system("test -d ./mobi") == 0
@@ -19,8 +17,6 @@ BEGIN {
 		print "</tr></thead><tbody>"
 		FS = "\t"
 }
-
-@include "./res/idauth.awk"
 
 {
 		if (!$5) next; 
