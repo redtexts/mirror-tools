@@ -1,8 +1,9 @@
-PANDOC_OPT=-S --data-dir=./res/ --template=./res/default
+PANDOC_OPT=-s -f markdown-raw_html --data-dir=./res/ --template=./res/default
 PANDOC_EPUB_OPT=$(PANDOC_OPT) -m --epub-chapter-level=2 -t epub3
 PANDOC_HTML_OPT=$(PANDOC_OPT) --katex --css=../style.css -t html5
 CALIBRE_MOBI_OPT=--pretty-print --enable-heuristics
-PANDOC_PDF_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontsize=12pt -V geometry="margin=1.2in" -V documentclass=article -V mainfont="Utopia" --latex-engine=xelatex -t latex
+PANDOC_XETEX_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontsize=12pt -V geometry="margin=1.2in" -V documentclass=article -V mainfont="Utopia" --latex-engine=xelatex -t latex
+PANDOC_MS_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontfamily=N -V hyphenate=1 -t ms
 
 DIRS=epub mobi html pdf
 TEXTS:=$(wildcard txt/*.md)
@@ -46,7 +47,11 @@ pdf: mkdir-pdf $(PDF)
 	rm -f index.htmk keywords.html
 	$(MAKE) index.html
 pdf/%.pdf: txt/%.md
-	pandoc $< $(PANDOC_PDF_OPT) -o $@
+ifdef MS
+	pandoc $< $(PANDOC_MS_OPT) -o $@
+else
+	pandoc $< $(PANDOC_XETEX_OPT) -o $@
+endif
 
 all: epub mobi pdf html index.html
 
