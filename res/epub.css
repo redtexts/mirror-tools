@@ -18,7 +18,6 @@ body * { line-height: inherit; }
 h1, h2, h3, h4, h5, h6 {
 		font-family: 'Noto Serif', 'Open Serif', Times, serif;
 		text-align: left;
-		color: #FD3D3D;
 		font-variant: common-ligatures lining-nums proportional-nums;
 		font-feature-settings: "kern", "liga", "clig", "lnum", "pnum";
 		font-weight: bolder;
@@ -27,8 +26,8 @@ h1.title { font-variant: small-caps; }
 h1.title, h2.author, h3.date { text-align: center; border-width: 0; }
 #front blockquote { text-align: left; }
 a.footnoteRef { vertical-align: super; }
-p#source { text-align: center; font-size: smaller; }
-p#source a { color: #FD3D3D; }
+p#source { margin-top: 4em; text-align: center; font-size: smaller; }
+a { color: #FD3D3D; }
 q { quotes: "“" "”" "‘" "’"; }
 blockquote, p {
 		-epub-hyphens: auto;
