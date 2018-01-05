@@ -5,8 +5,8 @@
     sub("^.*id=\"", "", id)
     sub("\">.*$", "", id)
     rest=$0
-    sub("<h.*>", "", rest)
-    print header "<a class=\"an\" href=\"#" id "\">&sect;</a>" rest;
+    sub("<h[^>]*>", "", rest)
+    print header "><a class=\"an\" href=\"#" id "\">&sect;</a>" rest;
     next
 }
 

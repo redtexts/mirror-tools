@@ -41,7 +41,7 @@ END {
     sub(/"$/, "", md["title"]) # remove trailing quotation marks
     gsub(/\\"/, "\"", md["title"]) # un-escape quotation marks
     sub(/^.*\//, "", FILENAME) # remove file path
-    sub(/\.[:alnum:]*$/, "", FILENAME) # remove file extention
+    sub(/\.[[:alnum:]]*$/, "", FILENAME) # remove file extention
     
     OFS="\t";
     if (keywords == 1 && "keywords" in md) {
