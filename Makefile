@@ -3,7 +3,7 @@ ifdef BRAND
 PANDOC_OPT+=-V brand
 endif
 PANDOC_EPUB_OPT=$(PANDOC_OPT) -m --epub-chapter-level=2 -t epub3
-PANDOC_HTML_OPT=$(PANDOC_OPT) --katex --html-q-tags --section-divs --css=../style.css -t html5
+PANDOC_HTML_OPT=$(PANDOC_OPT) --katex --html-q-tags --css=../style.css -t html5
 CALIBRE_MOBI_OPT=--pretty-print --enable-heuristics
 PANDOC_XETEX_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontsize=12pt -V geometry="margin=1.2in" -V documentclass=article -V mainfont="Utopia" --latex-engine=xelatex -t latex
 PANDOC_MS_OPT=$(PANDOC_OPT) -V papersize=a4 -V fontfamily=N -V hyphenate=1 -t ms
@@ -17,15 +17,15 @@ PDF=$(TEXTS:txt/%.md=pdf/%.pdf)
 
 index.html: html keywords.html style.css
 	find txt/ -name "*.md" -print0 |\
-			xargs -L 1 -P 4 -0 awk -f res/md.awk |\
+			xargs -L 1 -P 4 -0 awk --posix -f res/md.awk |\
 			sort -t'	' -k1,1 -k3,3n -k2,2 |\
-			awk -f res/idauth.awk -f res/index.awk > index.html
+			awk --posix -f res/idauth.awk -f res/index.awk > index.html
 
 keywords.html:
 	find txt/ -name "*.md" -print0 |\
-			xargs -L 1 -P 4 -0 awk -f res/md.awk -v keywords=1 |\
+			xargs -L 1 -P 4 -0 awk --posix -f res/md.awk -v keywords=1 |\
 			sort -t'	' -k5,5 -k1,1 -k3,3n -k2,2 |\
-			awk -f res/idauth.awk -f res/keywords.awk > keywords.html
+			awk --posix -f res/idauth.awk -f res/keywords.awk > keywords.html
 
 $(DIRS:%=mkdir-%):
 	mkdir -p $(patsubst mkdir-%,%,$@)
@@ -44,9 +44,9 @@ mobi/%.mobi: epub/%.epub
 
 html: mkdir-html $(HTML)
 html/%.html: txt/%.md
-	awk -f res/idauth.awk -f res/prehtml.awk $< |\
+	awk --posix -f res/idauth.awk -f res/prehtml.awk $< |\
 		pandoc $(PANDOC_HTML_OPT) |\
-		awk -f res/idauth.awk -f res/posthtml.awk > $@
+		awk --posix -f res/idauth.awk -f res/posthtml.awk > $@
 
 pdf: mkdir-pdf $(PDF) 
 	rm -f index.htmk keywords.html
