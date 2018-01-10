@@ -20,10 +20,12 @@ BEGIN {
 
 {
 		if (!$5) next; 
-		if ($5 != last_keyword)
+		if ($5 != last_keyword) {
 				print "<tr><th class=t colspan=5 id=\"" idauth($5) "\">Texts on <a href=\"#" idauth($5) "\">" $5 "</a></th></tr>"
+				print "<tr><th colspan=5>" $1 "</th></tr>"
+		}
 		if ($1 != last_author) 
-				print "<tr><th colspan=5><a href=\"./#" idauth($1) "\">" $1 "</a></th></tr>"
+				print "<tr><th colspan=5>" $1 "</th></tr>"
 		print "<tr>"
 		print "<td><a href=\"./html/" $4 ".html\"><em>" $2 "</em></a></td>"
 		print "<td><time>" $3 "</time></td>"
