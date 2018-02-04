@@ -75,8 +75,12 @@ $toc$
 $endif$
 $body$
 <footer>
-		<span id="nd" title="Toggle night/day mode" onclick="document.body.classList.toggle('dark')"></span>
-		redtexts.org mirror: <a href="..">home</a> | <a href="../..">web master</a>
+	<span id="nd" title="Toggle night/day mode" onclick="document.body.classList.toggle('dark')"></span>
+	redtexts.org mirror:
+	<a href="..">home</a>
+	$if(WMAST)$
+	| <a href="$WMAST$">web master</a>
+	$endif$
 </footer>
 </body>
 </html>

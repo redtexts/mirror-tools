@@ -4,8 +4,8 @@ BEGIN {
 		has_pdf  = system("test -d ./pdf")  == 0
 
 		print "<!DOCTYPE html>"
-		print "<title>keywords - redtexts.org mirror</title>"
-		print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"
+		print "<title>keywords - redtexts.org mirror " NAME "</title>"
+		print "<meta name=\"viewport\" content=\"width=device-width\" />"
 		print "<meta charset=\"utf-8\" />"
 		print "<link rel=\"stylesheet\" href=\"./style.css\">"
 		while ((getline < "./res/header_kw.txt") > 0)
@@ -29,11 +29,28 @@ BEGIN {
 		print "<tr>"
 		print "<td><a href=\"./html/" $4 ".html\"><em>" $2 "</em></a></td>"
 		print "<td><time>" $3 "</time></td>"
-		if (has_epub)	print "<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>"
-		if (has_mobi)	print "<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>"
-		if (has_pdf)	print "<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>"
-		print "</tr>"
+}
 
+has_epub {
+	print system("test -d ./epub/" $4 ".epub") == 0 ?
+		"<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>" :
+		"<td>&#x2198;</td>"
+}
+
+has_mobi {
+	print system("test -d ./mobi/" $4 ".mobi") == 0 ?
+		"<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>" :
+		"<td>&#x2198;</td>"
+}
+
+has_pdf {
+	print system("test -d ./pdf/" $4 ".pdf") == 0 ?
+		"<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>" :
+		"<td>&#x2198;</td>"
+}
+
+{
+		print "</tr>"
 		last_keyword = $5
 		last_author = $1
 }
@@ -43,7 +60,8 @@ END {
 		while ((getline < "./res/footer_kw.txt") > 0)
 				print;
 		print "<footer>"
-		print "<a href=\".\">home</a> |"
-		print "<a href=\"..\">web master</a></footer>"
+		print "<a href=\".\">home</a>"
+		if (WMAST)
+			print "| <a href=\"" WMAST "\">web master</a>"
 		print "</footer>"
 } 
