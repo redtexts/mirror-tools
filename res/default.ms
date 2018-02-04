@@ -14,7 +14,7 @@
 .nr LT \n[LL]
 .nr PS $if(pointsize)$$pointsize$$else$10p$endif$
 .nr VS $if(lineheight)$$lineheight$$else$12p$endif$
-.fam $if(fontfamily)$$fontfamily$$else$T$endif$
+.fam N
 .nr PI $if(indent)$$indent$$else$2m$endif$
 .nr PD 0.33v
 .nr FL \n[LL]
@@ -36,11 +36,8 @@ $endif$
 $if(adjusting)$
 .ad $adjusting$
 $endif$
-$if(hyphenate)$
 .hy
-$else$
 .nh
-$endif$
 $if(has-inline-math)$
 .EQ
 delim @@
@@ -54,9 +51,8 @@ $for(author)$
 .AU
 $author$
 $endfor$
-Date: $date$
 $if(date)$
-.ND "$date$"
+$date$
 $endif$
 $if(description)$
 .AB no
