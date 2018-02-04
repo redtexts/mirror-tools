@@ -9,3 +9,6 @@ res/header.txt
 res/footer.txt
 res/header_kw.txt
 res/footer_kw.txt
+.mconf
+.mconf.old
+.auto
