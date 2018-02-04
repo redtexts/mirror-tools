@@ -24,7 +24,7 @@ BEGIN {
 				print "<tr><th class=t colspan=5 id=\"" idauth($5) "\">Texts on <a href=\"#" idauth($5) "\">" $5 "</a></th></tr>"
 				print "<tr><th colspan=5>" $1 "</th></tr>"
 		}
-		if ($1 != last_author) 
+		else if ($1 != last_author)
 				print "<tr><th colspan=5>" $1 "</th></tr>"
 		print "<tr>"
 		print "<td><a href=\"./html/" $4 ".html\"><em>" $2 "</em></a></td>"
@@ -32,21 +32,21 @@ BEGIN {
 }
 
 has_epub {
-	print system("test -d ./epub/" $4 ".epub") == 0 ?
+	print system("test -f ./epub/" $4 ".epub") == 0 ?
 		"<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>" :
-		"<td>&#x2198;</td>"
+		"<td>&#x2297;</td>"
 }
 
 has_mobi {
-	print system("test -d ./mobi/" $4 ".mobi") == 0 ?
+	print system("test -f ./mobi/" $4 ".mobi") == 0 ?
 		"<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>" :
-		"<td>&#x2198;</td>"
+		"<td>&#x2297;</td>"
 }
 
 has_pdf {
-	print system("test -d ./pdf/" $4 ".pdf") == 0 ?
+	print system("test -f ./pdf/" $4 ".pdf") == 0 ?
 		"<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>" :
-		"<td>&#x2198;</td>"
+		"<td>&#x2297;</td>"
 }
 
 {

@@ -95,6 +95,8 @@ _getfiles() {
 # test if all necessary binaries are available
 which make >/dev/null 2>&1 || errcho "\"make\" not installed!"
 which pandoc >/dev/null 2>&1 || errcho "\"pandoc\" not installed!"
+pandoc -v | awk 'NR == 1 { exit $2 < 2 }' ||\
+	errcho "\"pandoc\" has to be at least be version 2.0 or higher!"
 which awk >/dev/null 2>&1 || errcho "\"awk\" not installed!"
 
 # start setup (ensure $MCONF exists and then load it)
@@ -112,7 +114,6 @@ fi
 
 # check if variables were properly loaded
 [ "$C_COPY" ] || [ "$M_NAME" ] || errcho "there was an error in \"$MCONF\". Some necessary variables weren't specified"
-
 
 # construct argument list for make
 FILES="$(_getfiles .html)"
@@ -134,7 +135,9 @@ mkdir -p $D_HTML
 [ $G_MOBI ] && mkdir -p $D_MOBI
 [ $G_PDF ] && mkdir -p $D_PDF
 make "${@:--s}" M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
-	 PDF_ENG="$PDF_ENG" $FILES keywords.html index.html || exit 1
+	 PDF_ENG="$PDF_ENG" $FILES || exit 1
+make "${@:--s}" -B M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
+	 keywords.html index.html || exit 2
 
 # copy or link files from build dir to intended location
 for d in $D_TXT/*.html; do
@@ -161,10 +164,15 @@ fi
 
 # automatically synchronise if
 if [ $O_AUTOSYNC ]; then
+	SYNC="index.html keywords.html style.css html/"
+	[ $G_MOBI ] && SYNC="$SYNC mobi/"
+	[ $G_EPUB ] && FILES="$SYNC epub/"
+	[ $G_PDF ] && FILES="$SYNC pdf/"
+
 	if which rsync 2>/dev/null >/dev/null; then
-		rsync -Lavcu $FILES $M_REMOTE
+		rsync -Lavcu $SYNC $M_REMOTE
 	elif which scp 2>/dev/null >/dev/null; then
-		scp -Crp $FILES $M_REMOTE
+		scp -Crp $SYNC $M_REMOTE
 	else
 		sed -i '/O_AUTOSYNC/d'
 		errcho "Couldn't automatically sync. Option removed."

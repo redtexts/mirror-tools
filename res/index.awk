@@ -4,7 +4,7 @@ BEGIN {
 		has_pdf  = system("test -d ./pdf")  == 0
 
 		print "<!DOCTYPE html>"
-		print "<title>redtexts mirror - " WMAST "</title>"
+		print "<title>redtexts mirror " NAME "</title>"
 		print "<meta name=\"viewport\" content=\"width=device-width\" />"
 		print "<meta charset=\"utf-8\" />"
 		print "<link rel=\"stylesheet\" href=\"./style.css\">"
@@ -28,21 +28,21 @@ BEGIN {
 }
 
 has_epub {
-	print system("test -d ./epub/" $4 ".epub") == 0 ?
+	print system("test -f ./epub/" $4 ".epub") == 0 ?
 		"<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>" :
-		"<td>&#x2198;</td>"
+		"<td>&#x2297;</td>"
 }
 
 has_mobi {
-	print system("test -d ./mobi/" $4 ".mobi") == 0 ?
+	print system("test -f ./mobi/" $4 ".mobi") == 0 ?
 		"<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>" :
-		"<td>&#x2198;</td>"
+		"<td>&#x2297;</td>"
 }	
 
 has_pdf {
-	print system("test -d ./pdf/" $4 ".pdf") == 0 ?
+	print system("test -f ./pdf/" $4 ".pdf") == 0 ?
 		"<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>" :
-		"<td>&#x2198;</td>"
+		"<td>&#x2297;</td>"
 }
 
 { print "</tr>" }
