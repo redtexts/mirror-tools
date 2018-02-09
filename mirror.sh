@@ -134,10 +134,10 @@ mkdir -p $D_HTML
 [ $G_EPUB ] && mkdir -p $D_EPUB
 [ $G_MOBI ] && mkdir -p $D_MOBI
 [ $G_PDF ] && mkdir -p $D_PDF
+
+# create files
 make "${@:--s}" M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
 	 PDF_ENG="$PDF_ENG" $FILES || exit 1
-make "${@:--s}" -B M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
-	 keywords.html index.html || exit 2
 
 # copy or link files from build dir to intended location
 for d in $D_TXT/*.html; do
@@ -161,6 +161,10 @@ if [ $G_PDF ]; then
 		$C_COPY "$PWD/$d" "$D_PDF"
 	done
 fi
+
+# create (and update) {index,keywords}.html
+make "${@:--s}" -B M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
+	 keywords.html index.html || exit 2
 
 # automatically synchronise if
 if [ $O_AUTOSYNC ]; then
