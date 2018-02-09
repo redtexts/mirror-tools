@@ -72,7 +72,7 @@ If you wish to have a different layout on your mirror, all you have to
 do is customise the `style.css` file in the root directory of this
 repository (**not** `/res/style.css`).
 
-In case want to change your `mirror.sh`_config, either delete the
+In case want to change your `mirror.sh` config, either delete the
 `.auto` file in your working directory, in case you told `mirror.sh` to
 automatically use your configuration.
 
