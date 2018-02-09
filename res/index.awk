@@ -4,6 +4,9 @@ BEGIN {
 		has_pdf  = system("test -d ./pdf")  == 0
 
 		print "<!DOCTYPE html>"
+		printf "<!--\ngenerated "
+		system("date -u")
+		print "-->"
 		print "<title>redtexts mirror " NAME "</title>"
 		print "<meta name=\"viewport\" content=\"width=device-width\" />"
 		print "<meta charset=\"utf-8\" />"
