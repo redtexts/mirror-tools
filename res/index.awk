@@ -28,21 +28,15 @@ BEGIN {
 }
 
 has_epub {
-	print system("test -f ./epub/" $4 ".epub") == 0 ?
-		"<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>" :
-		"<td>&#x2297;</td>"
+	print !system("test -f ./epub/" $4 ".epub") ? "<td><a href=\"./epub/" $4 ".epub\">&#x2198;</a></td>" : "<td>&#x2297;</td>"
 }
 
 has_mobi {
-	print system("test -f ./mobi/" $4 ".mobi") == 0 ?
-		"<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>" :
-		"<td>&#x2297;</td>"
+	print !system("test -f ./mobi/" $4 ".mobi") ? "<td><a href=\"./mobi/" $4 ".mobi\">&#x2198;</a></td>" : "<td>&#x2297;</td>"
 }	
 
 has_pdf {
-	print system("test -f ./pdf/" $4 ".pdf") == 0 ?
-		"<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>" :
-		"<td>&#x2297;</td>"
+	print !system("test -f ./pdf/" $4 ".pdf") ? "<td><a href=\"./pdf/" $4 ".pdf\">&#x2198;</a></td>" : "<td>&#x2297;</td>"
 }
 
 { print "</tr>" }
