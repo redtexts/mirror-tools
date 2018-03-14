@@ -168,13 +168,13 @@ make "${@:--s}" -B M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
 
 # automatically synchronise if
 if [ $O_AUTOSYNC ]; then
-	SYNC="index.html keywords.html style.css html/"
-	[ $G_MOBI ] && SYNC="$SYNC mobi/"
-	[ $G_EPUB ] && FILES="$SYNC epub/"
-	[ $G_PDF ] && FILES="$SYNC pdf/"
+	SYNC="index.html keywords.html style.css html"
+	[ $G_MOBI ] && SYNC="$SYNC mobi"
+	[ $G_EPUB ] && SYNC="$SYNC epub"
+	[ $G_PDF ] && SYNC="$SYNC pdf"
 
 	if which rsync 2>/dev/null >/dev/null; then
-		rsync -Lavcu $SYNC $M_REMOTE
+		rsync -zavu $SYNC $M_REMOTE
 	elif which scp 2>/dev/null >/dev/null; then
 		scp -Crp $SYNC $M_REMOTE
 	else
