@@ -6,37 +6,34 @@ BEGIN {
 }
 
 # add field to current multi-value field
-nr && /^[[:space:]]*-[[:space:]]+/ {
+nr && /^[ \t]*-[ \t]+/ {
     val = $0
-    gsub(/^[[:space:]]+*-[[:space:]]+/, "", val)
-    gsub(/[[:space:]]*$/, "", val)
+    gsub(/^[ \t]*-[ \t]+/, "", val)
+    gsub(/[ \t]*$/, "", val)
     if (md[cr]) md[cr] = md[cr] D val;
     else md[cr] = val;
 }
 
 # finish parsing multi-value field
-nr && /^[[:space:]]*-[[:space:]]+/ { nr = 0 }
+nr && /^[ \t]*-[ \t]+/ { nr = 0 }
 
 # add single-value field to metadata
-!nr && /^[[:alpha:]]+:[[:space:]]+/ {
+!nr && /^[a-zA-Z0-9]+:[ \t]+/ {
     val = $0
-    gsub(/^[[:alpha:]]+:[[:space:]]+/, "", val)
+    gsub(/^[a-zA-Z0-9]+:[ \t]+/, "", val)
     gsub(/:$/, "", $1)
     md[$1] = val
 }
 
 # start parsing multi-value field
-!nr && /^[[:alpha:]]+:[[:space:]]*$/ {
+!nr && /^[a-zA-Z0-9]+:[ \t]*$/ {
     nr = 1
     cr = $1
     gsub(/:$/, "", cr)
 }
 
-# finish parsing after YAML data ends
-$0 == "..." { exit }
-
 # output medatada: author, title, date and filename w/o extention
-END {
+$0 == "..." {
     sub(/^"/, "", md["title"]) # remove preceding quotation marks
     sub(/"$/, "", md["title"]) # remove trailing quotation marks
     gsub(/\\"/, "\"", md["title"]) # un-escape quotation marks
@@ -55,4 +52,5 @@ END {
 	for (i in au) # ... print a row for each author
 	    print au[i], md["title"], md["date"], FILENAME;
     }
+    exit
 }

@@ -55,8 +55,7 @@ installed, besides a standard \*NIX userland:
 - [XeTeX/XeLaTeX][xetex]: for proper, quality pdf generation
   **or** [Groff][groff]: for quick and lightweight pdf generation
 - [AWK][awk]: for generating `index.html` and `keywords.html` and
-  extracting metadata from the markdown files. **Note:** [mawk][mawk]
-  is (sadly) not supported, due to a bug in `res/md.awk`.
+  extracting metadata from the markdown files.
 
 At the very least `make`, pandoc and AWK are required. This will let you
 generate `.html` and `.epub` files.
@@ -87,6 +86,5 @@ All code is [in the public domain][legal]. Originally written by
 [xetex]: http://xetex.sourceforge.net/
 [groff]: https://gnu.org/software/groff/
 [awk]: https://en.wikipedia.org/wiki/AWK
-[mawk]: http://invisible-island.net/mawk/
 [legal]: ./LICENSE
 [xat]: https://sub.god.jp/~xat/
