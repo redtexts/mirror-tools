@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 $for(author-meta)$
   <meta name="author" content="$author-meta$">
 $endfor$
@@ -29,9 +29,6 @@ $endfor$
 $if(math)$
   $math$
 $endif$
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 $for(header-includes)$
   $header-includes$
 $endfor$
@@ -48,7 +45,7 @@ $for(author)$<a href="../#$author.link$">$author.name$</a>$sep$; $endfor$
 $if(date)$(<time>$date$</time>)$endif$</h2>
 $if(description)$
 <blockquote id="desc">
-		$description$
+$description$
 </blockquote>
 $endif$
 $if(fname)$
@@ -65,17 +62,12 @@ $for(keywords)$
 $endfor$
 </p>
 $endif$
-<p style="clear: right;"></p>
 </header>
 $endif$
-$if(toc)$
-<nav id="$idprefix$TOC">
-$toc$
-</nav>
-$endif$
+<article>
 $body$
+</article>
 <footer>
-	<span id="nd" title="Toggle night/day mode" onclick="document.body.classList.toggle('dark')"></span>
 	redtexts.org mirror:
 	<a href="..">home</a>
 	$if(WMAST)$

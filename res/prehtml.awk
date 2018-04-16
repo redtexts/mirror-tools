@@ -22,13 +22,14 @@ BEGIN {
 		ir = 1
 		next
 }
+
 ir && /^[[:space:]]*-[[:space:]]+/ {
 		gsub(/^[[:space:]]*-[[:space:]]+/, "")
 		print "- name: " $0
 		print "  link: " idauth($1)
 		next
 }
-ir && $0 !~ /^[[:space:]]*-[[:space:]]+/ { ir = 0 }
+ir && !/^[[:space:]]*-[[:space:]]+/ { ir = 0 }
 
 ### KEYWORDS ###
 
@@ -47,13 +48,14 @@ ir && $0 !~ /^[[:space:]]*-[[:space:]]+/ { ir = 0 }
 		ik = 1
 		next
 }
-ik && $0 ~ /^[[:space:]]*-[[:space:]]+/ {
+
+ik && /^[[:space:]]*-[[:space:]]+/ {
 		gsub(/^[[:space:]]*-[[:space:]]+/, "")
 		print "- word: " $0
 		print "  link: " idauth($1)
 		next
 }
-ik && $0 !~ /^[[:space:]]*-[[:space:]]+/ { ik = 0 }
+ik && !/^[[:space:]]*-[[:space:]]+/ { ik = 0 }
 
 # add fname tag before metadata ends
 $0 == "..." { 
