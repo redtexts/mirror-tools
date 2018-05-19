@@ -10,12 +10,22 @@ reset="$(tput sgr0)"
 export bold red reset
 
 # constants and defaults
+KINDLEGEN_CMD='touch book-$$$$.mobi && kindlegen $< -c1 -locale en -o book-$$$$.mobi; [ $$? -lt 2 ] && mv book-$$$$.mobi $@'
+CALIBRE_CMD="ebook-convert $< $@ --pretty-print --enable-heuristics"
 MCONF="./.mconf"
+AUTO="./.auto"
 D_TXT="./txt/"
 D_HTML="./html/"
 D_EPUB="./epub/"
 D_MOBI="./mobi/"
 D_PDF="./pdf/"
+
+# variables
+MAKEOPTS="-s -k"
+
+which nproc 2>&1 >/dev/null && {
+	MAKEOPTS="$MAKEOPTS -P$(nproc)"
+}
 
 # functions
 errcho() {
@@ -24,8 +34,8 @@ errcho() {
 }
 
 _runconf() {
-	[ -e $MCONF ] && mv $MCONF $MCONF.old
-	rm -f  .auto
+	[ -e $MCONF ] && mv $MCONF $MCONF.$(date -"%D-%H")
+	rm -f  $AUTO
 	echo "# please do not edit by hand" > $MCONF
 
 	printf "Mirror name: "
@@ -43,7 +53,7 @@ _runconf() {
 
 		printf "Automatically synchronise [Y/n]? "
 		read -r AUTOSYNC
-		echo "$AUTOSYNC" | grep -vi "^n" 2>/dev/null >/dev/null &&\
+		echo "$AUTOSYNC" | grep -vi "^n" 2>&1 >/dev/null &&\
 			echo "O_AUTOSYNC=1" >> $MCONF
 	}
 
@@ -57,34 +67,44 @@ _runconf() {
 
 	printf "Generate EPUB files [Y/n]? "
 	read -r GEN_E
-	echo "$GEN_E" | grep -vi "^n" 2>/dev/null >/dev/null && {
+	echo "$GEN_E" | grep -vi "^n" 2>&1 >/dev/null && {
 		echo 'G_EPUB=1' >> $MCONF
 
-		which ebook-convert >/dev/null 2>/dev/null && {
+		which ebook-convert 2>&1 >/dev/null && {
 			# mobi files can only be generated if epub files are generated AND
 			# `ebook-convert` is installed
 			printf "Generate MOBI (Kindle) files [Y/n]? "
 			read -r GEN_M
-			echo "$GEN_M" | grep -vi "^n" 2>/dev/null >/dev/null &&\
+			echo "$GEN_M" | grep -vi "^n" 2>&1 >/dev/null &&\
 				echo 'G_MOBI=1' >> $MCONF
+		}
+
+		which kindlegen 2>&1 >/dev/null && {
+			# mobi files can only be generated if epub files are generated AND
+			# `kindlegen` is installed
+			printf "Generate MOBI (Kindle) files [Y/n]? "
+			read -r GEN_M
+			echo "$GEN_M" | grep -vi "^n" 2>&1 >/dev/null &&\
+				echo 'G_MOBI=1' >> $MCONF &&\
+				echo 'O_MOBI="kg"' >> $MCONF
 		}
 	}
 
 	printf "Generate PDF files [Y/n]? "
 	read -r GEN_P
-	echo "$GEN_P" | grep -vi "^n" 2>/dev/null >/dev/null &&{
+	echo "$GEN_P" | grep -vi "^n" 2>&1 >/dev/null &&{
 		echo 'G_PDF=1' >> $MCONF
 
 		printf "Use Groff (-ms) to generate the PDFs [Y/n]? "
 		read -r USE_G
-		echo "$USE_G" | grep -vi "^n" 2>/dev/null >/dev/null && {
+		echo "$USE_G" | grep -vi "^n" 2>&1 >/dev/null && {
 			echo 'O_MS=1' >> $MCONF
 		}
 	}
 
 	printf "Autorun this configuration from now on [y/N]? "
 	read -r AUTOR
-	echo "$AUTOR" | grep -vi "^n" 2>/dev/null >/dev/null && touch .auto
+	echo "$AUTOR" | grep -vi "^n" 2>&1 >/dev/null && touch $AUTO
 }
 
 _getfiles() {
@@ -93,19 +113,19 @@ _getfiles() {
 }
 
 # test if all necessary binaries are available
-which make >/dev/null 2>&1 || errcho "\"make\" not installed!"
-which pandoc >/dev/null 2>&1 || errcho "\"pandoc\" not installed!"
+which make 2>&1 >/dev/null || errcho "\"make\" not installed!"
+which pandoc 2>&1 >/dev/null || errcho "\"pandoc\" not installed!"
 pandoc -v | awk 'NR == 1 { exit $2 < 2 }' ||\
 	errcho "\"pandoc\" has to be at least be version 2.0 or higher!"
-which awk >/dev/null 2>&1 || errcho "\"awk\" not installed!"
+which awk 2>&1 >/dev/null || errcho "\"awk\" not installed!"
 
 # start setup (ensure $MCONF exists and then load it)
 # echo "${bold}::: mirror.sh - create, maintain and update a redtexts mirror${reset}"
-if [ ! -e .auto ]; then
+if [ ! -e $AUTO ]; then
 	if [ -e $MCONF ]; then
 		printf "Previous configuration file found, do you want to use it again [Y/n]? "
 		read -r PCONF
-		echo "$PCONF" | grep -i "^n" 2>/dev/null >/dev/null && _runconf
+		echo "$PCONF" | grep -vi "^n" 2>/dev/null >&1 && _runconf
 	else
 		_runconf
 	fi
@@ -136,7 +156,7 @@ mkdir -p $D_HTML
 [ $G_PDF ] && mkdir -p $D_PDF
 
 # create files
-make "${@:--s}" M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
+make M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
 	 PDF_ENG="$PDF_ENG" $FILES || exit 1
 
 # copy or link files from build dir to intended location
@@ -154,6 +174,12 @@ if [ $G_MOBI ]; then
 	for d in $D_TXT/*.mobi; do
 		$C_COPY "$PWD/$d" "$D_MOBI"
 	done
+
+	if [ $O_MOBI = "kg" ]; then
+		sed -i '/^.epub.mobi$/,+1c .epub.mobi\n\t$KINDLEGEN_CMD' Makefile
+	else
+		sed -i '/^.epub.mobi$/,+1c .epub.mobi\n\t$CALIBRE_CMD' Makefile
+	fi
 fi
 
 if [ $G_PDF ]; then
@@ -163,7 +189,7 @@ if [ $G_PDF ]; then
 fi
 
 # create (and update) {index,keywords}.html
-make "${@:--s}" -B M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
+make $MAKEOPTS -B M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
 	 keywords.html index.html || exit 2
 
 # automatically synchronise if
@@ -173,9 +199,9 @@ if [ $O_AUTOSYNC ]; then
 	[ $G_EPUB ] && SYNC="$SYNC epub"
 	[ $G_PDF ] && SYNC="$SYNC pdf"
 
-	if which rsync 2>/dev/null >/dev/null; then
-		rsync -zavu $SYNC $M_REMOTE
-	elif which scp 2>/dev/null >/dev/null; then
+	if which rsync 2>/dev/null >&1 then
+		rsync -zauc $SYNC $M_REMOTE
+	elif which scp 2>/dev/null >&1 then
 		scp -Crp $SYNC $M_REMOTE
 	else
 		sed -i '/O_AUTOSYNC/d'
