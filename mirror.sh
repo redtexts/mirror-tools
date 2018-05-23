@@ -24,7 +24,7 @@ D_PDF="./pdf/"
 MAKEOPTS="-s -k"
 
 which nproc 2>&1 >/dev/null && {
-	MAKEOPTS="$MAKEOPTS -P$(nproc)"
+	MAKEOPTS="$MAKEOPTS -j $(nproc)"
 }
 
 # functions
@@ -175,7 +175,7 @@ if [ $G_MOBI ]; then
 		$C_COPY "$PWD/$d" "$D_MOBI"
 	done
 
-	if [ $O_MOBI = "kg" ]; then
+	if [ "$O_MOBI" = "kg" ]; then
 		sed -i '/^.epub.mobi$/,+1c .epub.mobi\n\t$KINDLEGEN_CMD' Makefile
 	else
 		sed -i '/^.epub.mobi$/,+1c .epub.mobi\n\t$CALIBRE_CMD' Makefile
@@ -199,9 +199,9 @@ if [ $O_AUTOSYNC ]; then
 	[ $G_EPUB ] && SYNC="$SYNC epub"
 	[ $G_PDF ] && SYNC="$SYNC pdf"
 
-	if which rsync 2>/dev/null >&1 then
+	if which rsync 2>/dev/null >/dev/null; then
 		rsync -zauc $SYNC $M_REMOTE
-	elif which scp 2>/dev/null >&1 then
+	elif which scp 2>/dev/null >/dev/null; then
 		scp -Crp $SYNC $M_REMOTE
 	else
 		sed -i '/O_AUTOSYNC/d'
