@@ -10,12 +10,12 @@ nr && /^[ \t]*-[ \t]+/ {
     val = $0
     gsub(/^[ \t]*-[ \t]+/, "", val)
     gsub(/[ \t]*$/, "", val)
-    if (md[cr]) md[cr] = md[cr] D val;
+    if (cd in md) md[cr] = md[cr] D val;
     else md[cr] = val;
 }
 
 # finish parsing multi-value field
-nr && /^[ \t]*-[ \t]+/ { nr = 0 }
+nr && /^[[:alnum:]]+:/ { nr = 0 }
 
 # add single-value field to metadata
 !nr && /^[a-zA-Z0-9]+:[ \t]+/ {
