@@ -11,11 +11,17 @@ function warn(msg) {
 }
 
 # GENERAL CHECKS
-blank && /^[[:space:]]*$/ { warn("avoid double blank lines")}
-{ blank = /^[[:space:]]*$/ }
-{ second_line = first_line; first_line = blank }
+/[[:space:]]{2,}/ { warn("avoid consecutive whitespaces") }
+
+blank && /^[[:space:]]*$/ { warn("avoid double blank lines") }
+
+/[@|*^{}_~]/ && !/\[\^/ && !/\*?[[:alpha:][:space:]-]+\*?/ {
+	 warn("avoid unusual charachters")
+}
 
 !in_header && length > 74 { warn("lines shoudln't be longer than 72 characters") }
+
+{ blank = /^[[:space:]]*$/ }
 
 # HEADER VALIDATION
 !header && /^---$/ { # start header
@@ -77,11 +83,14 @@ in_header { next }
 /[^.]\.{4,}[^.]/ { warn("don't use more than three dots for an ellipsis")}
 
 # MARKDOWN
-second_line && /^(-*|=*)$/ { err("all headings should use the ATX style") }
+second_line && /^(-+|=+)$/ { err("all headings should use the ATX style"); }
 
 /\^\[/ { warn("avoid using inline footnotes") }
 
 /<[[:alpha:]]*>/ { err("literal HTML code is forbidden") }
+
+# MISC.
+{ second_line = first_line; first_line = blank }
 
 # FINAL SUMMARY AND CHECKS
 END {
