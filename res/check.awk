@@ -95,6 +95,15 @@ second_line && /^(-+|=+)$/ { err("all headings should use the ATX style"); }
 # MISC.
 { second_line = first_line; first_line = blank }
 
+ENDFILE {
+	 if (FILENAME) {
+		  print "\nUNINAME OUTPUT (" FILENAME "):"
+		  if (!system("which uniname > /dev/null"))
+			   system("uniname -alp " FILENAME " | grep -iv latin")
+		  print ""
+	 }
+}
+
 # FINAL SUMMARY AND CHECKS
 END {
 	 if (!header)
