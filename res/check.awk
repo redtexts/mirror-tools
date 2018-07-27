@@ -82,6 +82,9 @@ in_header { next }
 /[^.]\.{2}[^.]/ { warn("avoid using \"..\"") }
 /[^.]\.{4,}[^.]/ { warn("don't use more than three dots for an ellipsis")}
 
+/[„“‘’’‘…―—–·«»]/ { err("don't use unicode punctuation") }
+/[​﻿‍‌]/ { err("don't use zero width whitespaces") }
+
 # MARKDOWN
 second_line && /^(-+|=+)$/ { err("all headings should use the ATX style"); }
 
