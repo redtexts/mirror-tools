@@ -65,6 +65,11 @@ $endif$
 </header>
 $endif$
 <article>
+$if(toc)$
+<nav id="$idprefix$TOC">
+$table-of-contents$
+</nav>
+$endif$
 $body$
 </article>
 <footer>

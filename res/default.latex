@@ -127,6 +127,14 @@ $if(brand)$
 \href{https://redtexts.org}{\emph{red texts: communist text files}}
 $endif$
 
+$if(toc)$
+{
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+
+
 $body$
 
 $if(natbib)$

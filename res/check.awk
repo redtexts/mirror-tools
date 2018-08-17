@@ -55,7 +55,7 @@ in_header && ($1 ~ /^(title|description|author)$/) &&
 in_header && /[[:space:]]+-/ { warn("don't use whitespaces in header lists") }
 in_header && /^[[:space:]]*$/ { err("header shoudln't cointain empty lines") }
 
-in_header && !/^-/ && $1 !~ /^(title|author|date|description|keywords):?$/ {
+in_header && !/^-/ && $1 !~ /^(title|author|date|description|keywords|toc(-depth)?):?$/ {
 	 warn("using unknown keyword \"" $1 "\"")
 }
 

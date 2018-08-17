@@ -23,7 +23,7 @@ keywords.html:
 
 .md.html:
 	$(AWK) -f res/idauth.awk -f res/prehtml.awk $< |\
-		$(PANDOC) $(PD_OPT) --katex --html-q-tags --css=../style.css -t html5 |\
+		$(PANDOC) $(PD_OPT) --katex --toc --html-q-tags --css=../style.css -t html5 |\
 		$(AWK) -f res/idauth.awk -f res/posthtml.awk > $@
 
 .md.epub:
@@ -33,4 +33,4 @@ keywords.html:
 	$(CALIBRE) $< $@ --pretty-print --enable-heuristics
 
 .md.pdf:
-	$(PANDOC) $< -V papersize=a4 $(PD_OPT) --pdf-engine=$(PDF_ENG) -o $@
+	$(PANDOC) $< --toc -V papersize=a4 $(PD_OPT) --pdf-engine=$(PDF_ENG) -o $@
