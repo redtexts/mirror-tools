@@ -12,6 +12,7 @@ function warn(msg) {
 
 # GENERAL CHECKS
 /[[:space:]]{2,}/ { warn("avoid consecutive whitespaces") }
+/[[:space:]]+$/ { warn("avoid trailing whitespaces") }
 
 blank && /^[[:space:]]*$/ { warn("avoid double blank lines") }
 
