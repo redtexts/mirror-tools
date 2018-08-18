@@ -127,7 +127,7 @@ $if(brand)$
 \href{https://redtexts.org}{\emph{red texts: communist text files}}
 $endif$
 
-$if(toc)$
+$if(use-toc)$
 {
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents

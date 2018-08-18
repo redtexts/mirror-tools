@@ -65,7 +65,7 @@ $endif$
 </header>
 $endif$
 <article>
-$if(toc)$
+$if(use-toc)$
 <nav id="$idprefix$TOC">
 $table-of-contents$
 </nav>
