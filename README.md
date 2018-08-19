@@ -7,7 +7,8 @@
 To create an archive, run:
 
 ```sh
-git clone https://github.com/redtexts/mirror-tools --recursive
+git clone https://github.com/redtexts/mirror-tools
+cd mirror-tools
 ./mirror.sh
 ```
 

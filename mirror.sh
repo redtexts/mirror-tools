@@ -19,6 +19,7 @@ D_HTML="./html/"
 D_EPUB="./epub/"
 D_MOBI="./mobi/"
 D_PDF="./pdf/"
+GIT_TXT="https://github.com/redtexts/texts"
 
 # variables
 MAKEOPTS="-s -k"
@@ -105,6 +106,10 @@ _runconf() {
 	printf "Autorun this configuration from now on [y/N]? "
 	read -r AUTOR
 	echo "$AUTOR" | grep -vi "^n" 2>&1 >/dev/null && touch $AUTO
+
+	printf "Auto-update texts repository [y/N]? "
+	read -r AUTOU
+	echo "$AUTOU" | grep -vi "^n" 2>&1 > /dev/null && echo "M_UPDATE=1" >> $MCONF
 }
 
 _getfiles() {
@@ -131,6 +136,14 @@ if [ ! -e $AUTO ]; then
 	fi
 fi
 . $MCONF
+
+if [ ! -d "$D_TXT" ]; then
+    git clone "$GIT_TXT" "$D_TXT"
+elif [ $M_UPDATE ]; then
+    cd $D_TXT
+    git pull || errcho "Failed to automatically update texts directory1!"
+    cd ..
+fi
 
 # check if variables were properly loaded
 [ "$C_COPY" ] || [ "$M_NAME" ] || errcho "there was an error in \"$MCONF\". Some necessary variables weren't specified"
