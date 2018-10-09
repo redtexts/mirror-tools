@@ -1,6 +1,6 @@
 #!/bin/sh
 # redtexts "mirror tool" makescript
-# by xat [https://sub.god.jp/~xat]
+# by xat [https://tilde.town/~xat]
 # in the public domain, 2018-
 
 # colours
