@@ -138,10 +138,10 @@ fi
 . $MCONF
 
 if [ ! -d "$D_TXT" ]; then
-    git clone "$GIT_TXT" "$D_TXT"
+    git clone "$GIT_TXT" "$D_TXT" 2>/dev/null
 elif [ $M_UPDATE ]; then
     cd $D_TXT
-    git pull || errcho "Failed to automatically update texts directory1!"
+    git pull 2>/dev/null || errcho "Failed to automatically update texts directory!"
     cd ..
 fi
 
@@ -213,7 +213,7 @@ if [ $O_AUTOSYNC ]; then
 	[ $G_PDF ] && SYNC="$SYNC pdf"
 
 	if which rsync 2>/dev/null >/dev/null; then
-		rsync -zauc $SYNC $M_REMOTE
+		rsync -auvc $SYNC $M_REMOTE
 	elif which scp 2>/dev/null >/dev/null; then
 		scp -Crp $SYNC $M_REMOTE
 	else
