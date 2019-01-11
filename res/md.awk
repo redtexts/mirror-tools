@@ -10,7 +10,7 @@ nr && /^[ \t]*-[ \t]+/ {
     val = $0
     gsub(/^[ \t]*-[ \t]+/, "", val)
     gsub(/[ \t]*$/, "", val)
-    if (cd in md) md[cr] = md[cr] D val;
+    if (cr in md) md[cr] = md[cr] D val;
     else md[cr] = val;
 }
 
