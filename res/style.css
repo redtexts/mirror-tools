@@ -1,3 +1,6 @@
+html{margin:0;padding:0;font-family:"Open Sans",arial,sans-serif;background:#bee;}
+body{max-width:50rem;margin:1em auto;padding:1em; background: #fff;}
+
 body {
 		font-family: 'Noto Sans', 'Open Sans', Helvetica, Arial, sans-serif;
 		margin: 0 auto;
@@ -25,13 +28,17 @@ header p#kw { font-size: smaller; padding-top: 0.5em; }
 
 h1, h2, h2 a, h3, header a, p a, li a, footer a { color: #FD3D3D; }
 blockquote, li, p { text-align: justify; }
+blockquote{color:#444;font-style:oblique;margin:0.5em 0;padding-left:0.75em;border-left:2.5pt solid #eec}
+blockquote > blockquote {border-color:#bdb}
+blockquote > blockquote > blockquote {border-color:#aca}
+blockquote > blockquote > blockquote > blockquote {border-color:#9b9}
 a { text-decoration: none; word-wrap: break-word; }
 hr { border-width: 0px; border-top: 1px solid #FD3D3D; }
-a.an { 
-		display: none; 
-		min-width: .75em; 
-		margin-left: -.75em; 
-		color: silver;  
+a.an {
+		display: none;
+		width: .75em;
+		margin-left: -.75em;
+		color: silver;
 		font-family: 'Noto Serif', 'Open Serif', times, serif;
 }
 a.an:hover { color: gray; }
@@ -99,11 +106,6 @@ footer span#nd::before { content: 'N'; }
 		footer a { color: white; font-weight: bold; }
 		footer span#nd { width: 2em; }
 }
-/* dark theme */
-body.dark { background: #111; color: #eee; }
-body.dark header { background: #222; border-color: #333; }
-body.dark header p#dl a:not(:first-of-type)::before { color: #eee; }
-body.dark footer span#nd::before { content: 'D'; }
 
 /* print */
 @media print {
@@ -130,3 +132,6 @@ body.dark footer span#nd::before { content: 'D'; }
 	hr { border-color: black; }
 }
 
+/* minimal reset - based on https://github.com/tomhodgins/preset */
+*{box-sizing:border-box;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-kerning: auto}
+html{-webkit-text-size-adjust:100%}
