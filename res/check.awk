@@ -15,7 +15,7 @@ function warn(msg) {
 }
 
 # GENERAL CHECKS
-/[[:space:]]{2,}/ { warn("avoid consecutive whitespaces") }
+/[^[:space:]][[:space:]]{2,}/  { warn("avoid consecutive whitespaces") }
 /[[:space:]]+$/ { warn("avoid trailing whitespaces") }
 
 blank && /^[[:space:]]*$/ { warn("avoid double blank lines") }
@@ -82,7 +82,7 @@ in_header { next }
 
 !/;$/ && /;[^[:space:][:punct:]]/ { warn("missing space after semicolon") }
 !/:$/ && /:[^[:space:][:punct:]]/ { warn("missing space after colon") }
-!/,$/ && /,[^[:space:][:punct:]]/ { warn("missing space after comma") }
+!/,$/ && /[^[:digit:]]?,[^[:space:][:punct:][:digit:]]/ { warn("missing space after comma") }
 
 /[^.]\.{2}[^.]/ { warn("avoid using \"..\"") }
 /[^.]\.{4,}[^.]/ { warn("don't use more than three dots for an ellipsis")}
