@@ -1,11 +1,11 @@
 .SUFFIXES: .md .html .epub .mobi .pdf
 
-AWK ?= /usr/bin/awk
-FIND ?= /usr/bin/find
-SORT ?= /usr/bin/sort
-XARGS ?= /usr/bin/xargs
-PANDOC ?= /usr/bin/pandoc
-CALIBRE ?= /usr/bin/ebook-convert
+AWK = /usr/bin/awk
+FIND = /usr/bin/find
+SORT = /usr/bin/sort
+XARGS = /usr/bin/xargs
+PANDOC = /usr/bin/pandoc
+CALIBRE = /usr/bin/ebook-convert
 
 PD_OPT=-s -f markdown-raw_html --data-dir=./res/ --template=./res/default -V NAME="$(M_NAME)" -V WMAST="$(M_WMASTER)"
 
