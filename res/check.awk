@@ -1,5 +1,9 @@
 #!/usr/bin/awk -f
 
+BEGINFILE {
+    printf("\nCHECKING %s\n", toupper(FILENAME))
+}
+
 function err(msg) {
 	 printf("err:  %s:%d: %s\n", FILENAME, NR, msg) > "/dev/stderr"
 	 errors++
