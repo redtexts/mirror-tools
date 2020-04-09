@@ -202,7 +202,7 @@ if [ $G_PDF ]; then
 fi
 
 # create (and update) {index,keywords}.html
-make $MAKEOPTS -B M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
+make $MAKEOPTS M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
 	 keywords.html index.html || exit 2
 
 # automatically synchronise if
