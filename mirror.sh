@@ -169,7 +169,7 @@ mkdir -p $D_HTML
 [ $G_PDF ] && mkdir -p $D_PDF
 
 # create files
-make M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
+make $MAKEOPTS M_NAME="$M_NAME" M_WMASTER="$M_WMASTER"\
 	 PDF_ENG="$PDF_ENG" $FILES || exit 1
 
 # copy or link files from build dir to intended location
